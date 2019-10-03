@@ -1,2 +1,2 @@
-# Play-Along
+# Play Along
 Game. Match. Play
