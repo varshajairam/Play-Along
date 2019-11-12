@@ -1,7 +1,29 @@
 # Don't track content of these folders
+$RECYCLE.BIN/
+.idea/
+.ionic/
+.sass-cache/
+.sourcemaps/
+.versions/
+.vscode/
+coverage/
+dist/
 node_modules/
+platforms/
+plugins/
+www/
 
 # Don't track these files
+*~
+*.sw[mnpcod]
+.tmp
+*.tmp
+*.tmp.*
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+UserInterfaceState.xcuserstate
 *.DS_Store
 *.exe
 *.7z
@@ -13,3 +35,6 @@ node_modules/
 *.rar
 *.tar
 *.env
+*.log
+log.txt
+npm-debug.log*
