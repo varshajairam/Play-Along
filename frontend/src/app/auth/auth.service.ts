@@ -30,8 +30,8 @@ export class AuthService {
   }*/
 
   login(user: User): Observable<AuthResponse> {
-    return;
-    /*return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/login`, user).pipe(
+    //return;
+    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/login`, user).pipe(
         tap(async (res: AuthResponse) => {
 
           if (res.user) {
@@ -40,7 +40,7 @@ export class AuthService {
             this.authSubject.next(true);
           }
         })
-    );*/
+    );
   }
 
   /*async logout() {
