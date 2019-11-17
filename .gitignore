@@ -36,5 +36,6 @@ UserInterfaceState.xcuserstate
 *.tar
 *.env
 *.log
+*.tern-project
 log.txt
 npm-debug.log*
