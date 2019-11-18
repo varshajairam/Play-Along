@@ -22,8 +22,8 @@ function getGamesHandler(req,res){
     ) AS address,created_by,DATE_FORMAT(created_on, '%Y-%m-%d') as created_on,owner_id
   FROM playalong.games where zipcode=`+zipcode+";"
 
-	dbConnection.functionSelect(sql);
- 	res.send(sql);
+	//dbConnection.functionSelect(sql);
+ 	res.send(dbConnection.functionSelect(sql));
 }
 
 module.exports = {
