@@ -18,11 +18,13 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+
+
   login(form){
-    let x = new URLSearchParams();
-    x.set("username", this.formData.username);
-    x.set("password", this.formData.password);
-    this.http.post("http://localhost:3000/login", x.toString(), this.HttpUploadOptions).subscribe(() => {
+    let URLParams = new URLSearchParams();
+    URLParams.set("username", this.formData.username);
+    URLParams.set("password", this.formData.password);
+    this.http.post("http://localhost:3000/login", URLParams.toString(), this.HttpUploadOptions).subscribe(() => {
       console.log("Success");
     }, () => {
       console.log("Failed");
