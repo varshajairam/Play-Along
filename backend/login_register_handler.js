@@ -1,4 +1,4 @@
-ifunction loginHandler(req, res) {
+function loginHandler(req, res) {
 	res.send("Hello World");
 }
 
@@ -9,5 +9,4 @@ function registerHandler(req, res) {
 module.exports = {
 	loginHandler: loginHandler,
 	registerHandler: registerHandler,
-	getGamesHandler:getGamesHandler
 }
