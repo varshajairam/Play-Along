@@ -129,6 +129,7 @@ CREATE TABLE IF NOT EXISTS `PlayAlong`.`wallet_payments` (
   UNIQUE INDEX `transaction_id_UNIQUE` (`transactionId` ASC) VISIBLE,
   INDEX `fk_wallet_payments_wallet_idx` (`wallet_id` ASC) VISIBLE,
   INDEX `fk_wallet_payments_type_enum_idx` (`type` ASC) VISIBLE,
+  INDEX `fk_wallet_payments_status_enum_idx` (`status` ASC) VISIBLE,
   CONSTRAINT `fk_wallet_payments_wallet`
     FOREIGN KEY (`wallet_id`)
     REFERENCES `PlayAlong`.`wallet` (`id`)
@@ -140,8 +141,8 @@ CREATE TABLE IF NOT EXISTS `PlayAlong`.`wallet_payments` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_wallet_payments_status_enum`
-    FOREIGN KEY ()
-    REFERENCES `PlayAlong`.`transaction_status_enum` ()
+    FOREIGN KEY (`status`)
+    REFERENCES `PlayAlong`.`transaction_status_enum` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -223,10 +224,12 @@ CREATE TABLE IF NOT EXISTS `PlayAlong`.`games` (
   `created_by` INT NOT NULL,
   `created_on` DATETIME NOT NULL,
   `owner_id` INT NOT NULL,
+  `required_skill_level_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_games_games_enum_idx` (`game_type_id` ASC) VISIBLE,
   INDEX `fk_games_users_idx` (`created_by` ASC) VISIBLE,
   INDEX `fk_games_users_owner_idx` (`owner_id` ASC) VISIBLE,
+  INDEX `fk_games_skill_level_enum_idx` (`required_skill_level_id` ASC) VISIBLE,
   CONSTRAINT `fk_games_games_enum`
     FOREIGN KEY (`game_type_id`)
     REFERENCES `PlayAlong`.`games_enum` (`id`)
@@ -240,6 +243,11 @@ CREATE TABLE IF NOT EXISTS `PlayAlong`.`games` (
   CONSTRAINT `fk_games_users_owner`
     FOREIGN KEY (`owner_id`)
     REFERENCES `PlayAlong`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_games_skill_level_enum`
+    FOREIGN KEY (`required_skill_level_id`)
+    REFERENCES `PlayAlong`.`skill_level_enum` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -484,4 +492,3 @@ INSERT INTO `PlayAlong`.`day_enum` (`id`, `day`) VALUES (6, 'Saturday');
 INSERT INTO `PlayAlong`.`day_enum` (`id`, `day`) VALUES (7, 'Sunday');
 
 COMMIT;
-
