@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from  "@angular/router";
-import { AuthService } from '../auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -9,15 +8,25 @@ import { AuthService } from '../auth.service';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private  authService:  AuthService, private  router:  Router) { }
+  HttpUploadOptions = {
+    headers: new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" })
+  }
+  formData = {username:"", password:""};
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
 
   login(form){
-    this.authService.login(form.value).subscribe((res)=>{
-      this.router.navigateByUrl('home');
-    });
+    let x = new URLSearchParams();
+    x.set("username", this.formData.username);
+    x.set("password", this.formData.password);
+    this.http.post("http://localhost:3000/login", x.toString(), this.HttpUploadOptions).subscribe(() => {
+      console.log("Success");
+    }, () => {
+      console.log("Failed");
+    })
   }
 
 }

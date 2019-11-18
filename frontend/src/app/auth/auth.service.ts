@@ -18,12 +18,12 @@ export class AuthService {
   /*register(user: User): Observable<AuthResponse> {
     return this.httpClient.post<AuthResponse>(`${this.AUTH_SERVER_ADDRESS}/register`, user).pipe(
         tap(async (res:  AuthResponse ) => {
-
-          if (res.user) {
-            await this.storage.set("ACCESS_TOKEN", res.user.access_token);
-            await this.storage.set("EXPIRES_IN", res.user.expires_in);
-            this.authSubject.next(true);
-          }
+          console.log("Success");
+          //if (res.user) {
+          //  await this.storage.set("ACCESS_TOKEN", res.user.access_token);
+          //  await this.storage.set("EXPIRES_IN", res.user.expires_in);
+          //  this.authSubject.next(true);
+          //}
         })
 
     );
