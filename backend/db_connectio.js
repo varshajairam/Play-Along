@@ -22,19 +22,42 @@ con.end();
 });
 }
 
-
+/*
 function functionSelect(sql){
 
 con.connect(function(err) {
+  var x;
   if (err) throw err;
   console.log("Connected!");
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log(JSON.parse(JSON.stringify(result)));
+    x=JSON.parse(JSON.stringify(result));
+    //return(JSON.parse(JSON.stringify(result)));
+    //return "helloworld";
   });
 con.end();
 });
+ return x;
 }
+*/
+
+
+
+var functionSelect = (queryString) => {     // console.log(queryString);     
+	return new Promise((resolve, reject) => {         
+		con.query(queryString, function(err, rows, fields) {             
+			if (err) {                 
+				resolve(false);                 
+				 console.log(err);             
+			}             
+			else {
+				console.log(rows);
+				resolve(rows); 
+				
+			}        
+		})     }) }
+
 
 module.exports = {
         functionSelect: functionSelect
