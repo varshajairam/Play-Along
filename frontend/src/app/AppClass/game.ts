@@ -9,7 +9,8 @@ export class Game {
     owner_id: number;
     cost: number;
     address: Address;
-    skills: any;
+    skill: Skill;
+    hasJoined: boolean;
 
     constructor(id: number = 0,
         game_type_id: number = 0,
@@ -19,7 +20,8 @@ export class Game {
         created_by: string = "",
         created_on: Date = new Date(),
         owner_id: number = 0,
-        cost: number = 0, skills: any  = []
+        cost: number = 0,
+        hasJoined: boolean = false
     ){
         this.id = id;
         this.game_type_id = game_type_id;
@@ -30,7 +32,7 @@ export class Game {
         this.created_on = created_on;
         this.owner_id = owner_id;
         this.cost = cost;
-        this.skills = new Array<string>();
+        this.hasJoined = hasJoined;
     }
 
     map(data){ // add null checks
@@ -38,7 +40,9 @@ export class Game {
         this.date = data.date;
         this.players_count = data.players_count;
         this.cost = data.cost;
-        this.skills = data.skills;
+        this.skill = data.required_skill_level_id;
+        this.hasJoined = data.hasJoined;
+        this.skill = data.skill;
         this.address = new Address();
         this.address.apt = data.address.apt;
         this.address.street = data.address.street;
@@ -60,7 +64,7 @@ export class Address {
         street: string = "",
         city: string = "",
         country: string = "",
-        zipcode: number = 0,
+        zipcode: number = 0
     ){
         this.apt = apt;
         this.street = street;
@@ -69,3 +73,5 @@ export class Address {
         this.zipcode = zipcode;
     }
 }
+
+export enum Skill {New = 1, Beginner, Intermediate, Advanced};

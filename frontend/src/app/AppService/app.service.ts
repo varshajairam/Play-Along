@@ -1,33 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Game } from '../AppClass/game';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AppService {
+    url: string;
+    game: Game;
     constructor(private http: HttpClient){
 
     }
 
-    getGames(zipcode: number) {
-        return this.http.get("URL"+zipcode);
-    }
-
-    getLocation() {
-        return new Observable((observer) => {
-            const {next, error} = observer;
-            let watchId;
-        
-            if('geolocation' in navigator){
-                watchId = navigator.geolocation.watchPosition(next, error);
-            } else {
-                error('Geolocation not available');
+    getGames(userId: number): Observable<Array<Game>> {
+        this.url = "http://localhost:3000/getGames";
+        return this.http.get(this.url+"?id="+userId)
+        .pipe(map(res => {
+            if(res instanceof Array){
+                return res.map(item =>{                    
+                    this.game = new Game();
+                    this.game.map(item);
+                    return this.game;
+                })
             }
-        
-            return {unsubscribe() {navigator.geolocation.clearWatch(watchId); }};
-        });
-    }
-    
+        })) 
+    }    
 }
 
