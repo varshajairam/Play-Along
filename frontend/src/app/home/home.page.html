@@ -28,10 +28,10 @@
       </ion-segment-button>
     </ion-segment>
     
-    <ion-spinner *ngIf = ""></ion-spinner>
+    <ion-spinner></ion-spinner>
     <div [ngSwitch]="segmentValue" >
       <div *ngSwitchCase="'myGames'">
-      <ion-card *ngFor = "let game of myGames | async">
+      <ion-card *ngFor = "let game of myGames">
         <ion-item>
           <ion-label>{{game.name}}</ion-label>
           <ion-button fill="outline" slot="end">Join</ion-button>       
@@ -54,16 +54,8 @@
         </ion-item>
         <ion-item>
           <ion-icon name="clipboard" slot="start"></ion-icon>
-          <!-- <ion-list>
-            <ion-item>
-              <ion-label>Required Skill(s)</ion-label>
-              <ion-select multiple="true" cancelText="Cancel" okText="Okay!">
-                <ion-select-option *ngFor="let skill of game.skills">{{skill}}</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list> -->
           <ion-card-subtitle>Required Skill</ion-card-subtitle>
-          <ion-label>{{game.skill}}</ion-label>
+          <ion-label slot="end">{{game.skill}}</ion-label>
         </ion-item>
       </ion-card>
     </div>
@@ -91,16 +83,8 @@
             </ion-item>
             <ion-item>
               <ion-icon name="clipboard" slot="start"></ion-icon>
-              <!-- <ion-list>
-                <ion-item>
-                  <ion-label>Required Skill(s)</ion-label>
-                  <ion-select multiple="true" cancelText="Cancel" okText="Okay!">
-                    <ion-select-option *ngFor="let skill of game.skills">{{skill}}</ion-select-option>
-                  </ion-select>
-                </ion-item>
-              </ion-list> -->
-              <ion-label>Required Skill</ion-label>
-              <ion-label>{{game.skill}}</ion-label>
+              <ion-card-subtitle>Required Skill</ion-card-subtitle>
+              <ion-label slot="end">{{game.skill}}</ion-label>
             </ion-item>
           </ion-card>
       </div>
