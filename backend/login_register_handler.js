@@ -37,7 +37,8 @@ function loginHandler(req, res) {
 }
 
 async function registerUserHandler(req, res) {
-		const query = "INSERT INTO user ( name, email, password, is_admin, dob, mobile,country, zipcode) VALUES ('"+req.body.name+"','"+req.body.email+"','"+req.body.password+"',"+req.body.is_admin+", '"+req.body.dob+"',"+req.body.mobile+", '"+req.body.country+"',"+req.body.zipcode+")";
+		var dob = req.body.dob.split('T')[0];
+		const query = "INSERT INTO user ( name, email, password, is_admin, dob, mobile,country, zipcode) VALUES ('"+req.body.name+"','"+req.body.email+"','"+req.body.password+"',0, '"+dob+"',"+req.body.mobile+", '"+req.body.country+"',"+req.body.zipcode+")";
 		await queryHandler(query);
 		
 		res.send("insert done");
