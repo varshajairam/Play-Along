@@ -12,7 +12,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { CommunicationService } from './services/communication.service';
 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
