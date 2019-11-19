@@ -15,7 +15,7 @@ var functionSelect = (queryString) => { // console.log(queryString);
                 console.log(err);
             } else {
                 console.log(rows);
-                resolve(rows);
+                resolve(JSON.stringify(rows));
 
             }
         })
