@@ -17,8 +17,12 @@
             <h3>Login</h3>
           </div>-->
           <div padding>
+
+              <ion-text color="danger" *ngIf="loginError">
+                  <p>Invalid Username/Password</p>
+              </ion-text>
             <ion-item>
-              <ion-input name="email" type="email" placeholder="your@email.com" [(ngModel)]="formData.username" required></ion-input>
+              <ion-input name="email" type="email" placeholder="your@email.com" [(ngModel)]="formData.username" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" required></ion-input>
             </ion-item>
             <ion-item>
               <ion-input name="password" type="password" placeholder="Password" [(ngModel)]="formData.password" required></ion-input>

@@ -8,6 +8,7 @@ import { CommunicationService } from './../services/communication.service'
 export class LoginPage implements OnInit {
   
   formData = {username:"", password:""};
+  loginError = false;
 
   constructor(private comm: CommunicationService) { }
 
@@ -18,6 +19,7 @@ export class LoginPage implements OnInit {
     this.comm.sendPost("login", this.formData).subscribe(() => {
       console.log("Success");
     }, () => {
+      this.loginError = true;
       console.log("Failed");
     })
   }
