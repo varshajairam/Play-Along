@@ -269,6 +269,7 @@ export class RegisterPage implements OnInit {
       x.set('dob', this.registerCredentials.dob);
       x.set('country', this.registerCredentials.country);
       x.set('zipcode', this.registerCredentials.zipcode);
+      
       console.log(this.registerCredentials);
       this.http.post('http://localhost:3000/register', x.toString(), this.HttpUploadOptions).subscribe(() => {
         console.log('Success');
