@@ -9,8 +9,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class RegisterPage implements OnInit {
   HttpUploadOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-  }
-  registerCredentials = {Name: '', email: '', mobile: '', password: '', confirm_password: '', dob: '', country: '', zip_code: ''};
+  };
+  registerCredentials = {name: '', email: '', mobile: '', password: '', confirm_password: '', dob: '', country: '', zipcode: ''};
   countries = [
     {name: 'Afghanistan', code: 'AF'},
     {name: 'Åland Islands', code: 'AX'},
@@ -262,13 +262,13 @@ export class RegisterPage implements OnInit {
   register(form) {
     if (this.registerCredentials.password === this.registerCredentials.confirm_password) {
       let x = new URLSearchParams();
-      x.set('Name', this.registerCredentials.Name);
-      x.set('Email', this.registerCredentials.email);
-      x.set('Mobile', this.registerCredentials.mobile);
-      x.set('Password', this.registerCredentials.password);
-      x.set('DOB', this.registerCredentials.dob);
-      x.set('Country', this.registerCredentials.country);
-      x.set('zip_code', this.registerCredentials.zip_code);
+      x.set('name', this.registerCredentials.name);
+      x.set('email', this.registerCredentials.email);
+      x.set('mobile', this.registerCredentials.mobile);
+      x.set('password', this.registerCredentials.password);
+      x.set('dob', this.registerCredentials.dob);
+      x.set('country', this.registerCredentials.country);
+      x.set('zipcode', this.registerCredentials.zipcode);
       console.log(this.registerCredentials);
       this.http.post('http://localhost:3000/register', x.toString(), this.HttpUploadOptions).subscribe(() => {
         console.log('Success');
