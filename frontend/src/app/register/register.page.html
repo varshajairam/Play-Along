@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title color="primary" text-sm-uppercase>
+    <ion-title color="primary" class = 'text-sm-uppercase'>
       PLAY ALONG
     </ion-title>
   </ion-toolbar>
@@ -18,7 +18,7 @@
 
     <ion-item>
       <ion-label position="floating">Email <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input required name ="email" type="email" [(ngModel)]="registerCredentials.email"></ion-input>
+      <ion-input required name ="email" type="email" [(ngModel)]="registerCredentials.email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -44,7 +44,7 @@
     <ion-item>
       <ion-label position="floating">Country <ion-text color="danger">*</ion-text></ion-label>
       <ion-select name = "country" [(ngModel)]="registerCredentials.country">
-        <ion-select-option *ngFor="let country of countries" (value)="country.code">{{country.name}}</ion-select-option>
+        <ion-select-option *ngFor="let country of countries" [value] = "country.code" >{{country.name}}</ion-select-option>
       </ion-select>
     </ion-item>
 
