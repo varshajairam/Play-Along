@@ -8,13 +8,7 @@ var LocalStrategy = require('passport-local').Strategy;
 const app = express();
 var login_register_handler = require('./login_register_handler');
 const port = 3000;
-const bodyParser = require('body-parser');
 const sql = require('mysql')
-
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 var home_handler = require('./home_handler');
