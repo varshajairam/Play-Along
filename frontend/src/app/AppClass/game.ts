@@ -42,7 +42,7 @@ export class Game {
         this.cost = data.cost;
         this.skill = data.required_skill_level_id;
         this.hasJoined = data.hasJoined;
-        this.skill = data.required_skill;
+        this.skill = data.skill;
         this.address = new Address();
         data.address = JSON.parse(data.address);
         this.address.apt = data.address.apt;
