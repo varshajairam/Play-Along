@@ -62,9 +62,30 @@ async function registerGameHandler(req, res){
 	res.send("done");
 }
 
+function loginHandler(username, password, done) {
+	if(username == "test" && password == "test")
+		return done(null, {username: "test"})
+	return done(null, false, { message: 'Incorrect username or password.' });
+}
+
+function serializeUser(user, done) {
+	done(null, 1)
+}
+
+function deserializeUser(id, done) {
+	done(null, {username: "test"})
+}
+
+function logoutHandler(req, res) {
+	req.logout();
+	res.send("Success");
+}
+
 module.exports = {
 	loginHandler: loginHandler,
 	registerUserHandler: registerUserHandler,
-	registerGameHandler: registerGameHandler
-
+	registerGameHandler: registerGameHandler,
+	logoutHandler: logoutHandler,
+	serializeUser: serializeUser,
+	deserializeUser: deserializeUser
 }
