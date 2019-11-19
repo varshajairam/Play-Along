@@ -9,7 +9,7 @@ export class Game {
     owner_id: number;
     cost: number;
     address: Address;
-    skill: Skill;
+    skill: string;
     hasJoined: boolean;
 
     constructor(id: number = 0,
@@ -42,8 +42,9 @@ export class Game {
         this.cost = data.cost;
         this.skill = data.required_skill_level_id;
         this.hasJoined = data.hasJoined;
-        this.skill = data.skill;
+        this.skill = data.required_skill;
         this.address = new Address();
+        data.address = JSON.parse(data.address);
         this.address.apt = data.address.apt;
         this.address.street = data.address.street;
         this.address.city = data.address.city;
@@ -73,5 +74,3 @@ export class Address {
         this.zipcode = zipcode;
     }
 }
-
-export enum Skill {New = 1, Beginner, Intermediate, Advanced};
