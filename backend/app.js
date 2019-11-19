@@ -8,6 +8,7 @@ var LocalStrategy = require('passport-local').Strategy;
 const app = express();
 var login_register_handler = require('./login_register_handler');
 const port = 3000;
+const sql = require('mysql')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 var home_handler = require('./home_handler');
@@ -44,7 +45,8 @@ app.post('/login', passport.authenticate('local'), function(req, res) {
 	res.send("Success");
 });
 app.get('/logout', login_register_handler.logoutHandler);
-app.post('/register', login_register_handler.registerHandler);
 app.get('/getGames',home_handler.getGamesHandler);
+app.post('/register', login_register_handler.registerUserHandler);
+app.post('/registergame', login_register_handler.registerGameHandler);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

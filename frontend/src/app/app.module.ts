@@ -12,7 +12,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { CommunicationService } from './services/communication.service';
 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
