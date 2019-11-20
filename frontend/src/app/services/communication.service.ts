@@ -25,7 +25,7 @@ export class CommunicationService {
     	headers: new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" })
   	}
   	for (const key in data) {
-  		postData.set(key, data.key);
+  		postData.set(key, data[key]);
   	}
 
   	return this.http.post(environment.serverRoot + route, postData.toString(), headers);
