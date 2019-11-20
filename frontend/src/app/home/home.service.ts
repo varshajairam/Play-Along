@@ -8,18 +8,16 @@ import { CommunicationService } from '../services/communication.service';
 @Injectable({
     providedIn: 'root'
 })
-export class AppService {
+export class HomeService {
     url: string;
     game: Game;
     constructor(private http: HttpClient, private commService: CommunicationService){
 
     }
 
-    getGames(userId: number): Observable<Array<Game>> {
+    getGames(user): Observable<Array<Game>> {
         this.url = "getGames";
-        let data = {id : userId};
-        return this.commService.get(this.url, data)
-        //this.http.get(this.url+"?id="+userId)
+        return this.commService.get(this.url, user)
         .pipe(map(res => {
             if(res instanceof Array){
                 return res.map(item =>{                    

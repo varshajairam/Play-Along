@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
 import { Game } from '../AppClass/game';
 import { OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
-import { Observable, Subject, of } from 'rxjs';
-import { AppService } from '../AppService/app.service';
+import { HomeService } from './home.service';
 
 @Component({
   selector: 'app-home',
@@ -12,14 +9,13 @@ import { AppService } from '../AppService/app.service';
   styleUrls: ['home.page.scss']
 })
 export class HomePage implements OnInit, AfterViewInit, OnDestroy {
-  private myGames: Observable<Game[]>;
-  private newGames: Observable<Game[]>;
-  //destroy$: Subject<boolean> = new Subject<boolean>();
+  private myGames: Array<Game>;
+  private newGames: Array<Game>;
 
   private user: any;
   private segmentValue: any = "myGames";
   
-  constructor(private appService: AppService) {
+  constructor(private homeService: HomeService) {
     this.user  = {name: "User", id: 1};
   }
 
@@ -27,15 +23,17 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(){ 
-    this.myGames = this.appService.getGames(this.user.id);
-    this.populateGames();  
+    this.homeService.getGames(this.user).subscribe(data => {
+      this.newGames = data.filter(game => {
+        return game.hasJoined == false;
+      })
+      this.myGames = data.filter(game => {
+        return game.hasJoined == true;
+      })      
+    });
   }
 
   ngOnDestroy(){
-  }
-
-  populateGames(){
-    
   }
 
   segmentChanged(event){
