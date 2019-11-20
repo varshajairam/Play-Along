@@ -11,6 +11,7 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 var home_handler = require('./home_handler');
+var enroll_handler=require('./enroll_handler');
 app.use(session({
 	secret: 'keyboard cat',
   	resave: false,
@@ -46,5 +47,6 @@ app.post('/login', passport.authenticate('local'), function(req, res) {
 app.get('/logout', login_register_handler.logoutHandler);
 app.post('/register', login_register_handler.registerHandler);
 app.get('/getGames',home_handler.getGamesHandler);
+app.post('/enrollGame',enroll_handler.enrollGamesHandler);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

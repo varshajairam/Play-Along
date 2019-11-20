@@ -1,7 +1,8 @@
 function getGamesHandler(req, res) {
     var dbConnection = require('./db_connectio.js');
     var userId = req.query.id;
-    
+   
+    /*
     var sql = `SELECT G.id,G.game_type_id,G.name,DATE_FORMAT(DATE, '%Y-%m-%d') as date,players_count,cost/100 as cost,
      json_object('apt',G.apt,'street',G.street,'city',G.city,'country',G.country,'zipcode',G.zipcode) AS
      address,created_by,DATE_FORMAT(created_on, '%Y-%m-%d') as created_on,owner_id,
@@ -10,15 +11,16 @@ function getGamesHandler(req, res) {
      U.zipcode=G.zipcode and
      G.required_skill_level_id = S.id and
      U.id=`+userId+";";
+    */
     
-    
-    //var sql="call playalong.getHome("+userId+");";
+    var sql="call playalong.getHome("+userId+");";
     console.log(sql);
     (async() => {
 
         var result = await dbConnection.functionSelect(sql);
 	//result = result.map(row => (row.package = JSON.stringify(row.package), row));
-        res.send(result);
+	console.log(result);
+        res.send(result[0]);
     })()
 }
 
