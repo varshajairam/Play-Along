@@ -9,16 +9,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <form #form="ngForm" (ngSubmit)="login(form)">
+  <form #form="ngForm" (ngSubmit)="login(form)" method="post">
     <ion-grid>
       <ion-row justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <!--<div text-center>
-            <h3>Login</h3>
-          </div>-->
           <div padding>
-
-              <ion-text color="danger" *ngIf="loginError">
+            <ion-text color="danger" *ngIf="loginError">
                   <p>Invalid Username/Password</p>
               </ion-text>
             <ion-item>
