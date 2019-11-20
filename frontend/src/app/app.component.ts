@@ -25,6 +25,10 @@ export class AppComponent {
       title: 'Login',
       url: '/login',
       icon: 'person'
+	},
+	{
+      title: 'Register',
+      url: '/register',
     },
     {
       title: 'Create Game',

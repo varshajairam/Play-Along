@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="primary" class = 'text-sm-uppercase'>
+      PLAY ALONG
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="register(form)" method="post">
+    <ion-item>
+      <ion-label position="floating">Name <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input name="name" [(ngModel)]="registerCredentials.name" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required name ="email" type="email" [(ngModel)]="registerCredentials.email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Mobile <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required name = "mobile" type="numeric" [(ngModel)]="registerCredentials.mobile"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required name="password" type="password" [(ngModel)]="registerCredentials.password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Confirm Password <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required name = "confirm_password" type="password" [(ngModel)]="registerCredentials.confirm_password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Date Of Birth <ion-text color="danger">*</ion-text></ion-label>
+      <ion-datetime name = "dob" displayFormat="MMMM DD YYYY" [(ngModel)]="registerCredentials.dob"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Country <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select name = "country" [(ngModel)]="registerCredentials.country">
+        <ion-select-option *ngFor="let country of countries" [value] = "country.code" >{{country.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Zip Code <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required name = "zipcode" type="numeric" [(ngModel)]="registerCredentials.zipcode"></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" expand="full" color="danger" [disabled]="form.invalid" expand="block">Register</ion-button>
+  </form>
+  <p text-center>Already have an account?</p>
+  <ion-button expand="full" color="primary" >Login</ion-button>
+</ion-content>
