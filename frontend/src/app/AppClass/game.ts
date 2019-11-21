@@ -65,7 +65,22 @@ export class Game {
         return this._skill;
     }
 
+    get id(): number {
+        return this._id;
+    }
+
+    get game_type_id(): number {
+        return this._game_type_id;
+    }
+
+    get owner_id(): number {
+        return this._owner_id;
+    }
+
     map(data){
+        this._id = data.id;
+        this._owner_id = data.owner_id;
+        this._game_type_id = data.game_type_id;
         this._name = data.name;
         this._date = data.date;
         this._players_count = data.players_count;

@@ -28,11 +28,12 @@
       </ion-segment-button>
     </ion-segment>
     
-    <ion-spinner></ion-spinner>
+    <ion-spinner *ngIf="showSpinner"></ion-spinner>
     <div [ngSwitch]="segmentValue" >
       <div *ngSwitchCase="'myGames'">
+        <ion-card-subtitle *ngIf = "myGames && myGames.length == 0" color="medium" class="ion-padding-start ion-padding-top">Go ahead and join your first game!</ion-card-subtitle>
       <ion-card *ngFor = "let game of myGames">
-        <ion-item>
+        <ion-item button = "true">
           <ion-label>{{game.name}}</ion-label>
           <ion-button fill="outline" slot="end">Join</ion-button>       
         </ion-item>
@@ -60,10 +61,11 @@
       </ion-card>
     </div>
       <div *ngSwitchCase="'newGames'">
+          <ion-card-subtitle *ngIf = "newGames && newGames.length == 0" color="medium" class="ion-padding-start ion-padding-top">Oops! Looks like no games are created yet. Create one here.</ion-card-subtitle>
           <ion-card *ngFor = "let game of newGames">
             <ion-item>
               <ion-label>{{game.name}}</ion-label>
-              <ion-button fill="outline" slot="end">Join</ion-button>       
+              <ion-button fill="outline" slot="end" (click) = "joinGame(game)">Join</ion-button>       
             </ion-item>
             <ion-item>
               <ion-icon name="calendar" slot="start"></ion-icon>
@@ -89,6 +91,7 @@
           </ion-card>
       </div>
   </div>
+  <toast></toast>
 </ion-content>
 <ion-footer>
   <ion-toolbar>

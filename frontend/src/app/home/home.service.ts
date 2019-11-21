@@ -27,6 +27,16 @@ export class HomeService {
                 })
             }
         })) 
-    }    
+    }
+    
+    enrollGame(gameDetail){
+        this.url = "enrollGame";
+        return this.commService.sendPost(this.url, gameDetail)
+        .subscribe(() => {
+            console.log("Success");
+          }, () => {
+            console.log("Failed");
+          })
+    }
 }
 
