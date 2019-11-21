@@ -9,6 +9,7 @@ import { CommunicationService } from './../services/communication.service';
 export class GamePage implements OnInit {
   constructor(private comm: CommunicationService) { }
   eventDetails = {
+    game_type_id: '',
     name: '',
     date: '',
     playerCount: '',
@@ -19,8 +20,9 @@ export class GamePage implements OnInit {
     country: '',
     zipcode: '',
     created_by: 'User',
-    created_on: '11-24-2019',
-    owner_id: 'User'
+    created_on: '',
+    owner_id: 'User',
+    required_skill_level_id: ''
   };
   countries = [
     {name: 'Afghanistan', code: 'AF'},
@@ -267,6 +269,15 @@ export class GamePage implements OnInit {
     {name: 'Zambia', code: 'ZM'},
     {name: 'Zimbabwe', code: 'ZW'}
   ];
+  registerskills = [{games: '', skills: ''}];
+  allgames = [
+    {game: 'Football', ID: '1'},
+    {game: 'Cricket', ID: '2'},
+    {game: 'Basketball', ID: '3'},
+    {game: 'Tennis', ID: '4'},
+    {game: 'Baseball', ID: '5'},
+  ];
+
   ngOnInit() {
   }
 
@@ -282,8 +293,7 @@ export class GamePage implements OnInit {
     x.set('country', this.eventDetails.country);
     x.set('zipcode', this.eventDetails.zipcode);
 
-
-    this.comm.sendPost('game', x.toString()).subscribe(() => {
+    this.comm.sendPost('game',  this.eventDetails).subscribe(() => {
       console.log('Success');
     }, () => {
       console.log('Failed');
