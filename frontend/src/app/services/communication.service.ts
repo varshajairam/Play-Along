@@ -16,16 +16,17 @@ export class CommunicationService {
   		getData.set(key, data[key]);
   	}
 
-  	return this.http.get(environment.serverRoot + route + "?" + getData.toString());
+  	return this.http.get(environment.serverRoot + route + "?" + getData.toString(), {withCredentials: true});
   }
 
   sendPost(route, data=null) {
   	let postData = new URLSearchParams();
   	let headers = {
-    	headers: new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" })
+    	headers: new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" }),
+      withCredentials: true
   	}
   	for (const key in data) {
-  		postData.set(key, data.key);
+  		postData.set(key, data[key]);
   	}
 
   	return this.http.post(environment.serverRoot + route, postData.toString(), headers);
