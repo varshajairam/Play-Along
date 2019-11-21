@@ -9,7 +9,7 @@ const cors = require('cors');
 
 var login_register_handler = require('./login_register_handler');
 var home_handler = require('./home_handler');
-
+var wallet_handler= require('./wallet_handler');
 const app = express();
 const port = 3000;
 
@@ -39,6 +39,7 @@ app.get('/logout', login_register_handler.logoutHandler);
 app.get('/getGames',home_handler.getGamesHandler);
 app.post('/register', login_register_handler.registerUserHandler);
 app.post('/registergame', login_register_handler.registerGameHandler);
+app.get('/getWallet',wallet_handler.getWalletHandler);
 app.post('/testlogin', (req, res) => {
 	console.log(req.user);
 	res.json({status: "Success"});
