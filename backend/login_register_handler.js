@@ -30,17 +30,28 @@ async function registerGameHandler(req, res){
 }
 
 function loginHandler(username, password, done) {
-	if(username == "test@test.com" && password == "test")
-		return done(null, {username: "test"})
-	return done(null, false, { message: 'Incorrect username or password.' });
+	const query = "select * from user where email = ?";
+	const args = [username];
+	mysql_helper.executeQuery(query, args).then((result) => {
+		if (!result.length) return done(null, false, { message: 'Incorrect username or password.' });
+		const hashed_pass = result[0].password;
+		bcrypt.compare(password, hashed_pass, function(err, res) {
+			if (err || !res) return done(null, false, { message: 'Incorrect username or password.' });
+			return done(null, result[0]);
+		});
+	});
 }
 
 function serializeUser(user, done) {
-	done(null, 1)
+	done(null, user.id);
 }
 
 function deserializeUser(id, done) {
-	done(null, {username: "test"})
+	const query = "select * from user where id = ?";
+	const args = [id];
+	mysql_helper.executeQuery(query, args).then((result) => {
+		done(null, result[0]);
+	});
 }
 
 function logoutHandler(req, res) {
