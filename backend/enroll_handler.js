@@ -1,13 +1,23 @@
 function enrollGamesHandler(req, res) {
 
-    var dbConnection = require('./db_connectio.js');
+    var mysql_helper = require('./mysql_helper');
     var userId = req.body.id;
     var ownerId= req.body.owner_id;
     var gameId=req.body.game_id;
     var amount=req.body.amount;
+    set mysql.createConnection({multipleStatements: true});
+
+    //var sql="call playalong.enroll("+amount+","+userId+","+ownerId+","+gameId+",@result,@enrollRes);select @resultEnroll as resultEnroll,@enrollMessage as enrollResponse;";
     
-    var sql="call playalong.enroll("+amount+","+userId+","+ownerId+","+gameId+",@result,@enrollRes);select @resultEnroll as resultEnroll,@enrollMessage as enrollResponse;";
-    console.log(sql);
+    var query="call playalong.enroll(?,?,?,?,@resultEnroll,@enrollMessage);select @resultEnroll as resultEnroll,@enrollMessage as enrollResponse;"
+    console.log(query);
+    
+    const values = [[[req.body.amount, req.body.id,req.body.owner_id, req.body.game_id]]];
+		mysql_helper.executeQuery(query,[req.body.amount, req.body.id,req.body.owner_id, req.body.game_id]).then((result) => {
+			res.send(result[0]);
+		});
+
+    /*
     (async() => {
 
         var result = await dbConnection.functionSelect(sql);
@@ -19,7 +29,7 @@ function enrollGamesHandler(req, res) {
 	else
 	   res.send(result[0]);
 
-    })()
+    })()*/
 }
 module.exports = {
     enrollGamesHandler:enrollGamesHandler
