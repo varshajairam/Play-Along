@@ -25,13 +25,7 @@ export class AppComponent {
       title: 'Login',
       url: '/login',
       icon: 'person'
-	},
-	{
-      title: 'Register',
-      url: '/register',
-      icon: 'add-circle'
-    }
-
+	  }
   ];
 
   constructor(

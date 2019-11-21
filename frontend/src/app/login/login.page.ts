@@ -15,12 +15,12 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  login(form){
+  login(){
     this.comm.sendPost("login", this.formData).subscribe(() => {
       console.log("Success");
-    }, () => {
+    }, (err) => {
       this.loginError = true;
-      console.log("Failed");
+      console.log(err);
     })
   }
 

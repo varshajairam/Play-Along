@@ -63,7 +63,7 @@ async function registerGameHandler(req, res){
 }
 
 function loginHandler(username, password, done) {
-	if(username == "test" && password == "test")
+	if(username == "test@test.com" && password == "test")
 		return done(null, {username: "test"})
 	return done(null, false, { message: 'Incorrect username or password.' });
 }
