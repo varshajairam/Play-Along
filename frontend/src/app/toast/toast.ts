@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -6,7 +6,9 @@ import { ToastController } from '@ionic/angular';
   templateUrl: 'toast.html',
   styleUrls: ['./toast.scss'],
 })
-export class ToastExample {
+
+export class Toast {
+  @Input() message: string;
 
   constructor(public toastController: ToastController) {}
 
@@ -20,19 +22,20 @@ export class ToastExample {
 
   async presentToastWithOptions() {
     const toast = await this.toastController.create({
-      header: 'Toast header',
-      message: 'Click to Close',
-      position: 'top',
+      header: '',
+      message: this.message,
+      position: 'bottom',
       buttons: [
-        {
-          side: 'start',
-          icon: 'star',
-          text: 'Favorite',
-          handler: () => {
-            console.log('Favorite clicked');
-          }
-        }, {
-          text: 'Done',
+        // {
+        //   side: 'start',
+        //   icon: 'star',
+        //   text: 'Favorite',
+        //   handler: () => {
+        //     console.log('Favorite clicked');
+        //   }
+        // },
+         {
+          text: 'OK',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');

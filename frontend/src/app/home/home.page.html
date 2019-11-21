@@ -18,7 +18,7 @@
         <p>Check out events near you. Happy gaming!</p>
       </ion-card-content>
     </ion-card>
-
+   
     <ion-segment [(ngModel)]="segmentValue" color="primary" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="myGames">
         My Games
@@ -27,15 +27,16 @@
         New Games
       </ion-segment-button>
     </ion-segment>
-    
+     
     <ion-spinner *ngIf="showSpinner"></ion-spinner>
     <div [ngSwitch]="segmentValue" >
       <div *ngSwitchCase="'myGames'">
         <ion-card-subtitle *ngIf = "myGames && myGames.length == 0" color="medium" class="ion-padding-start ion-padding-top">Go ahead and join your first game!</ion-card-subtitle>
       <ion-card *ngFor = "let game of myGames">
         <ion-item button = "true">
-          <ion-label>{{game.name}}</ion-label>
-          <ion-button fill="outline" slot="end">Join</ion-button>       
+          <ion-text color="primary">
+            <ion-label>{{game.name}}</ion-label>
+          </ion-text>
         </ion-item>
         <ion-item>
           <ion-icon name="calendar" slot="start"></ion-icon>
@@ -43,11 +44,11 @@
         </ion-item>
         <ion-item>
           <ion-icon name="pin" slot="start"></ion-icon>
-          <ion-label>{{game.address.apt && game.address.apt.length > 0 ? game.address.apt+', ' : ''}}{{game.address.street}}, {{game.address.city}}, {{game.address.country}}, {{game.address.zipcode}}</ion-label>
+          <ion-card-subtitle>{{game.address.apt && game.address.apt.length > 0 ? game.address.apt+', ' : ''}}{{game.address.street}}, {{game.address.city}}, {{game.address.country}}, {{game.address.zipcode}}</ion-card-subtitle>
         </ion-item>
         <ion-item>
           <ion-icon name="people" slot="start"></ion-icon>
-          <ion-label>{{game.players_count}}</ion-label>
+          <ion-label>{{game.spots_taken}} of {{game.players_count}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-icon name="logo-usd" slot="start"></ion-icon>
@@ -61,10 +62,12 @@
       </ion-card>
     </div>
       <div *ngSwitchCase="'newGames'">
-          <ion-card-subtitle *ngIf = "newGames && newGames.length == 0" color="medium" class="ion-padding-start ion-padding-top">Oops! Looks like no games are created yet. Create one here.</ion-card-subtitle>
+          <ion-card-subtitle *ngIf = "newGames && newGames.length == 0" color="medium" class="ion-padding-start ion-padding-top">Hmm ... looks like no games are created yet. Create one here.</ion-card-subtitle>
           <ion-card *ngFor = "let game of newGames">
             <ion-item>
-              <ion-label>{{game.name}}</ion-label>
+              <ion-text color="primary">
+                <ion-label>{{game.name}}</ion-label>
+              </ion-text>
               <ion-button fill="outline" slot="end" (click) = "joinGame(game)">Join</ion-button>       
             </ion-item>
             <ion-item>
@@ -73,11 +76,11 @@
             </ion-item>
             <ion-item>
               <ion-icon name="pin" slot="start"></ion-icon>
-              <ion-label>{{game.address.apt && game.address.apt.length > 0 ? game.address.apt+', ' : ''}}{{game.address.street}}, {{game.address.city}}, {{game.address.country}}, {{game.address.zipcode}}</ion-label>
+              <ion-card-subtitle>{{game.address.apt && game.address.apt.length > 0 ? game.address.apt+', ' : ''}}{{game.address.street}}, {{game.address.city}}, {{game.address.country}}, {{game.address.zipcode}}</ion-card-subtitle>
             </ion-item>
             <ion-item>
               <ion-icon name="people" slot="start"></ion-icon>
-              <ion-label>{{game.players_count}}</ion-label>
+              <ion-label>{{game.spots_taken}} of {{game.players_count}}</ion-label>
             </ion-item>
             <ion-item>
               <ion-icon name="logo-usd" slot="start"></ion-icon>
@@ -91,10 +94,13 @@
           </ion-card>
       </div>
   </div>
-  <toast></toast>
+  <toast [message] = displayMsg></toast>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-title>Footer</ion-title>
+    <ion-title size="small">&copy;&nbsp;Play Along</ion-title>
+    <ion-text color="secondary">
+        <ion-title size="small">Game. Match. Play.</ion-title>
+    </ion-text>
   </ion-toolbar>
 </ion-footer>
