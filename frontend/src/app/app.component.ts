@@ -25,13 +25,17 @@ export class AppComponent {
       title: 'Login',
       url: '/login',
       icon: 'person'
-	},
-	{
+    },
+    {
       title: 'Register',
       url: '/register',
       icon: 'add-circle'
+    },
+    {
+      title: 'Registergames',
+      url: '/registergames',
+      icon: 'add-circle'
     }
-
   ];
 
   constructor(
