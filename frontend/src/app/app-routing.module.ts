@@ -25,10 +25,10 @@ const routes: Routes = [
   {
     path: 'registergames',
     loadChildren: () => import('./registergames/registergames.module').then(m => m.RegistergamesPageModule)
-  }
-
-
-];
+  },
+  { path: 'createclass',
+    loadChildren: () => import('./createclass/createclass.module').then(m => m.CreateclassPageModule)}
+    ];
 
 @NgModule({
   imports: [

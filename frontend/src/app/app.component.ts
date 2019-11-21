@@ -35,6 +35,11 @@ export class AppComponent {
       title: 'Registergames',
       url: '/registergames',
       icon: 'add-circle'
+    },
+    {
+      title: 'Createclass',
+      url: '/createclass',
+      ion: 'add-circle'
     }
   ];
 

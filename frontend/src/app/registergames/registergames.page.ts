@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { CommunicationService } from './../services/communication.service';
 
 @Component({
   selector: 'app-registergames',
@@ -7,10 +7,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
   styleUrls: ['./registergames.page.scss'],
 })
 export class RegistergamesPage implements OnInit {
-  HttpUploadOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-  };
   registerskills = [{games: '', skills: ''}];
+  registerskill = false;
+  // allgames = this.comm.get(,)
   allgames = [
     {game: 'Football', ID: '1'},
     {game: 'Cricket', ID: '2'},
@@ -22,7 +21,7 @@ export class RegistergamesPage implements OnInit {
       {skill: 'Beginner'},
       {skill: 'Intermediate'},
       {skill: 'Expert'}];
-  constructor(private http: HttpClient) { }
+  constructor(private comm: CommunicationService) { }
 
   ngOnInit() {
   }
@@ -33,11 +32,14 @@ export class RegistergamesPage implements OnInit {
   deleteSkill() {
     this.registerskills.pop();
   }
-  registergame(form){
-    let nx = new URLSearchParams();
-    nx.set('game', this.registerskills.games);
-    nx.set('skill', this.registerskills.skills);
+  registergame(form) {
     console.log(this.registerskills);
+    this.comm.sendPost('register', this.registerskills).subscribe(() => {
+      console.log('Success');
+    }, () => {
+      this.registerskill = true;
+      console.log('Failed');
+    });
   }
 
 }
