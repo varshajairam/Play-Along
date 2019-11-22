@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { CommunicationService } from './services/communication.service';
 import { UserService } from './services/user.service';
+import { WalletModule } from './utilities/wallet/wallet.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,8 @@ import { UserService } from './services/user.service';
     HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    WalletModule
   ],
   providers: [
     StatusBar,
