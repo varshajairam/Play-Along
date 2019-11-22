@@ -269,7 +269,7 @@ export class GamePage implements OnInit {
     {name: 'Zambia', code: 'ZM'},
     {name: 'Zimbabwe', code: 'ZW'}
   ];
-  registerskills = [{games: '', skills: ''}];
+  //registerskills = [{games: '', skills: ''}];
   allgames = [
     {game: 'Football', ID: '1'},
     {game: 'Cricket', ID: '2'},
@@ -277,21 +277,25 @@ export class GamePage implements OnInit {
     {game: 'Tennis', ID: '4'},
     {game: 'Baseball', ID: '5'},
   ];
-
+  allskills = [
+    {skill: 'New', ID: '1'},
+    {skill: 'Beginner', ID: '2'},
+    {skill: 'Intermediate', ID: '3'},
+    {skill: 'Expert', ID: '4'}];
   ngOnInit() {
   }
 
   createGame(form) {
-    let x = new URLSearchParams();
-    x.set('name', this.eventDetails.name);
-    x.set('date', this.eventDetails.date);
-    x.set('playerCount', this.eventDetails.playerCount);
-    x.set('cost', this.eventDetails.cost);
-    x.set('apt', this.eventDetails.apt);
-    x.set('street', this.eventDetails.street);
-    x.set('city', this.eventDetails.city);
-    x.set('country', this.eventDetails.country);
-    x.set('zipcode', this.eventDetails.zipcode);
+    // let x = new URLSearchParams();
+    // x.set('name', this.eventDetails.name);
+    // x.set('date', this.eventDetails.date);
+    // x.set('playerCount', this.eventDetails.playerCount);
+    // x.set('cost', this.eventDetails.cost);
+    // x.set('apt', this.eventDetails.apt);
+    // x.set('street', this.eventDetails.street);
+    // x.set('city', this.eventDetails.city);
+    // x.set('country', this.eventDetails.country);
+    // x.set('zipcode', this.eventDetails.zipcode);
 
     this.comm.sendPost('game',  this.eventDetails).subscribe(() => {
       console.log('Success');
