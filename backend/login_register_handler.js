@@ -28,12 +28,14 @@ async function registerSkillCall(req, res){
 
 async function registerGameHandler(req, res){
 	
+	size = game_id.length;
+	for (var i =0; i < size; i++){
 	const query = "INSERT INTO user_skills(user_id, game_id, skill_id) VALUES ?";
 	const values = [[[req.body.user_id, req.body.game_id, req.body.skill_id]]];
 	mysql_helper.executeQuery(query, values).then((result) => {
 			res.send("done");
 	});
-	
+	}
 	
 }
 
