@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommunicationService } from './../services/communication.service';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import { all } from 'q';
 
 @Component({
   selector: 'app-registergames',
@@ -11,11 +12,9 @@ import {HttpClient} from "@angular/common/http";
 export class RegistergamesPage implements OnInit {
   registerskills = [{games: '', skills: ''}];
   registerskill = false;
-  url1 = 'http://localhost:3000/registerGameCall';
-  url2 = 'registerSkillCall';
+  url1 = 'http://localhost:3000/registergamecall';
+  url2 = 'http://localhost:3000/registerskillcall';
 
-  gamedata = {name: '', id : 0};
-  skilldata = {skill : ''};
   allgames = [];
   allskills = [];
   constructor(private comm: CommunicationService, private http: HttpClient) { }
@@ -24,7 +23,15 @@ export class RegistergamesPage implements OnInit {
   ngOnInit() {
   }
   getgamedata(){
-    this.http.get(this.url1).subscribe(() => {
+    this.http.get(this.url1).subscribe((res) => {
+      if(res instanceof Array){
+        res.forEach((obj) => {
+          let gamedata = {name: '', id : 0};
+          gamedata.name = obj["name"];
+          gamedata.id = obj['id'];
+          this.allgames.push(gamedata);
+        })
+      }
       console.log('Success');
     }, () => {
       console.log('Failed');
@@ -32,7 +39,14 @@ export class RegistergamesPage implements OnInit {
   }
 
   getskilldata(){
-    this.http.get(this.url2).subscribe(() => {
+    this.http.get(this.url2).subscribe((res1) => {
+      if(res1 instanceof Array){
+        res1.forEach((obj) => {
+          let skilldata = {level: ''};
+          skilldata.level = obj["level"];
+          this.allskills.push(skilldata);
+        })
+      }
       console.log('Success');
     }, () => {
       console.log('Failed');

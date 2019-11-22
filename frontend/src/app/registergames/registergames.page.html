@@ -15,8 +15,8 @@
       <ion-col width-50>
         <ion-item>
           <ion-label position="floating">Games <ion-text color="danger">*</ion-text></ion-label>
-          <ion-select (click)="getgamedata()"  name = "country" [(ngModel)]="regskill.games">
-            <ion-select-option *ngFor="let game of allgames" [value] = "game.ID" >{{game.game}}</ion-select-option>
+          <ion-select (click)="getgamedata()"  name = "game" [(ngModel)]="regskill.games">
+            <ion-select-option *ngFor="let game of allgames" [value] = "game.id" >{{game.name}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
@@ -24,8 +24,8 @@
       <ion-col width-50>
         <ion-item>
           <ion-label position="floating">Skills <ion-text color="danger">*</ion-text></ion-label>
-          <ion-select (click)="getskilldata()" name = "country" [(ngModel)]="regskill.skills">
-            <ion-select-option *ngFor="let skill of allskills" [value] = "skill.skill" >{{skill.skill}}</ion-select-option>
+          <ion-select (click)="getskilldata()" name = "skill" [(ngModel)]="regskill.skills">
+            <ion-select-option *ngFor="let skill of allskills" [value] = "skill.level" >{{skill.level}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>

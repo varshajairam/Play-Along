@@ -8,12 +8,12 @@ const con = mysql.createConnection({
 
 function executeQuery(query, args) {
 	return new Promise((resolve, reject) => {
-		con.connect(function(err) {
-			if (err) reject(err);
+		
+			//if (err) reject(err);
 			con.query(query, args, function(err, result) {
 				if (err) reject(err);
 				resolve(result);
-			})
+			
 		});
 	});
 }

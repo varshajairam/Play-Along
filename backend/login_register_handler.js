@@ -12,21 +12,21 @@ function registerUserHandler(req, res) {
 	});
 }
 
-async function registerGameCall(req, res){
+function registerGameCall(req, res){
 	const query = "SELECT * FROM games_enum";
 	mysql_helper.executeQuery(query, []).then((result) => {
 			res.send(result);
 		});
 }
 
-async function registerSkillCall(req, res){
+function registerSkillCall(req, res){
 	const query = "SELECT * FROM skill_level_enum";
 	mysql_helper.executeQuery(query, []).then((result) => {
 			res.send(result);
 		});
 }
 
-async function registerGameHandler(req, res){
+function registerGameHandler(req, res){
 	
 	size = game_id.length;
 	for (var i =0; i < size; i++){
