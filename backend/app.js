@@ -38,7 +38,10 @@ app.post('/login', passport.authenticate('local'), function(req, res) {
 app.get('/logout', login_register_handler.logoutHandler);
 app.get('/getGames',home_handler.getGamesHandler);
 app.post('/register', login_register_handler.registerUserHandler);
-app.post('/registergame', login_register_handler.registerGameHandler);
+app.get('/registergamecall', login_register_handler.registerGameCall);
+app.get('/registerskillcall', login_register_handler.registerSkillCall);
+app.post('/registergamehandler', login_register_handler.registerGameHandler);
+
 app.post('/testlogin', (req, res) => {
 	console.log(req.user);
 	res.json({status: "Success"});

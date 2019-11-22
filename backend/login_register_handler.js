@@ -12,21 +12,29 @@ function registerUserHandler(req, res) {
 	});
 }
 
+async function registerGameCall(req, res){
+	const query = "SELECT * FROM games_enum";
+	mysql_helper.executeQuery(query, []).then((result) => {
+			res.send(result);
+		});
+}
+
+async function registerSkillCall(req, res){
+	const query = "SELECT * FROM skill_level_enum";
+	mysql_helper.executeQuery(query, []).then((result) => {
+			res.send(result);
+		});
+}
+
 async function registerGameHandler(req, res){
-	var x;
-	var game = (req.body.game).split(',');
-	var level = (req.body.level).split(',');
-	for (x=0 ; x<game.length; x++) {
-		const query2 = "select id from games_enum where name= '"+game[x]+"'";
-		const query3 = "select id from skill_level_enum where level= '"+level[x]+"'";
-		const query5 = "select id from user where email='"+req.body.email+"'";
-		let result_game = await mysql_helper.executeQuery(query2, null);
-		let result_skill = await mysql_helper.executeQuery(query3, null);
-		let result_user = await mysql_helper.executeQuery(query5, null);
-		const query4 = "INSERT INTO user_skills(user_id, game_id, skill_id) VALUES ("+result_user[0]['id']+", "+result_game[0]['id']+", "+result_skill[0]['id']+")";
-		await mysql_helper.executeQuer(query4, null);
-	}
-	res.send("done");
+	
+	const query = "INSERT INTO user_skills(user_id, game_id, skill_id) VALUES ?";
+	const values = [[[req.body.user_id, req.body.game_id, req.body.skill_id]]];
+	mysql_helper.executeQuery(query, values).then((result) => {
+			res.send("done");
+	});
+	
+	
 }
 
 function loginHandler(username, password, done) {
@@ -52,6 +60,8 @@ module.exports = {
 	loginHandler: loginHandler,
 	registerUserHandler: registerUserHandler,
 	registerGameHandler: registerGameHandler,
+	registerGameCall: registerGameCall,
+	registerSkillCall: registerSkillCall,
 	logoutHandler: logoutHandler,
 	serializeUser: serializeUser,
 	deserializeUser: deserializeUser
