@@ -13,6 +13,7 @@ export class Game {
     private _address: Address;
     private _skill: string;
     private _hasJoined: boolean;
+    private _spots_taken: number;
 
     constructor(id: number = 0,
         game_type_id: number = 0,
@@ -49,6 +50,10 @@ export class Game {
         return this._players_count;
     }
 
+    get spots_taken(): number{
+        return this._spots_taken;
+    }
+
     get hasJoined(): boolean{
         return this._hasJoined;
     }
@@ -81,7 +86,7 @@ export class Game {
         this._id = data.id;
         this._owner_id = data.owner_id;
         this._game_type_id = data.game_type_id;
-        this._name = data.name;
+        this._name = data.name.toUpperCase();
         this._date = data.date;
         this._players_count = data.players_count;
         this._cost = data.cost;
@@ -95,6 +100,7 @@ export class Game {
         this._address.city = data.address.city;
         this._address.country = data.address.country;
         this._address.zipcode = data.address.zipcode;
+        this._spots_taken = data.spotsTaken;
     }
 }
 
