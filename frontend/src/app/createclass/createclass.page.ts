@@ -16,7 +16,6 @@ export class CreateclassPage implements OnInit {
 
 
   classDetails = {
-    name: '',
     classname: '',
     studentCount: '',
     cost: '',
@@ -298,7 +297,7 @@ export class CreateclassPage implements OnInit {
   }
 
   createGame(form) {
-    if (this.classDetails.startdate <= this.classDetails.enddate) {
+    if (Date.parse(this.classDetails.startdate) <= Date.parse(this.classDetails.enddate)) {
       console.log(this.classDetails);
       this.comm.sendPost('register', this.classDetails).subscribe(() => {
         console.log('Success');

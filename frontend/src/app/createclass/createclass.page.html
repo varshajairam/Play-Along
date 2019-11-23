@@ -35,11 +35,11 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">Start Date<ion-text color="danger">*</ion-text></ion-label>
-      <ion-datetime required name ="startdate" min= {{date}} displayFormat="MMMM DD YYYY"  type="date" [(ngModel)]="classDetails.startdate" ></ion-datetime>
+      <ion-datetime required name ="startdate" min= {{date}} max="2050-31-12" displayFormat="MMMM DD YYYY"  type="date" [(ngModel)]="classDetails.startdate" ></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label position="floating">End Date<ion-text color="danger">*</ion-text></ion-label>
-      <ion-datetime required name ="enddate" displayFormat="MMMM DD YYYY"  type="date" [(ngModel)]="classDetails.enddate" ></ion-datetime>
+      <ion-datetime required name ="enddate" min= {{date}} max="2050-31-12" displayFormat="MMMM DD YYYY"  type="date" [(ngModel)]="classDetails.enddate" ></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Apartment<ion-text color="danger">*</ion-text></ion-label>
