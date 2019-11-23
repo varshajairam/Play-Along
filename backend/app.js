@@ -48,5 +48,6 @@ app.post('/testlogin', (req, res) => {
 	console.log(req.user);
 	res.json({status: "Success"});
 })
+app.get('/getClass',class_handler.getClassHandler);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
