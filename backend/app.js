@@ -28,7 +28,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy(login_register_handler.loginHandler));
+passport.use(new LocalStrategy({
+	usernameField: 'username', 
+	passwordField: 'password', 
+	passReqToCallback: true
+}, login_register_handler.loginHandler));
 passport.serializeUser(login_register_handler.serializeUser);
 passport.deserializeUser(login_register_handler.deserializeUser);
 

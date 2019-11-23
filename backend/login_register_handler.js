@@ -39,9 +39,10 @@ function registerGameHandler(req, res){
 	
 }
 
-function loginHandler(username, password, done) {
-	const query = "select * from user where email = ?";
-	const args = [username];
+function loginHandler(req, username, password, done) {
+	const is_admin = (req.body.is_admin == 'true');
+	const query = "select * from user where email = ? and is_admin = ?";
+	const args = [username, is_admin];
 	mysql_helper.executeQuery(query, args).then((result) => {
 		if (!result.length) return done(null, false, { message: 'Incorrect username or password.' });
 		const hashed_pass = result[0].password;

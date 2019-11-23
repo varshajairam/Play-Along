@@ -9,7 +9,7 @@ import { NavController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   
-  formData = {username:"", password:""};
+  formData = {username:"", password:"", is_admin: false};
   loginError = false;
 
   constructor(private comm: CommunicationService, private user: UserService, private navCtrl: NavController) { 
