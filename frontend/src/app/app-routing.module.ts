@@ -41,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'class',
-    loadChildren: () => import('./class/class.module').then(m => m.ClassPageModule)
+    loadChildren: () => import('./class/class.module').then(m => m.ClassPageModule),
     canActivate: [AuthGuardService]
   }
 ];
