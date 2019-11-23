@@ -21,16 +21,18 @@ export class RegistergamesPage implements OnInit {
 
 
   ngOnInit() {
+    this.getgamedata();
+    this.getskilldata();
   }
-  getgamedata(){
+  getgamedata() {
     this.http.get(this.url1).subscribe((res) => {
-      if(res instanceof Array){
+      if (res instanceof Array) {
         res.forEach((obj) => {
           let gamedata = {name: '', id : 0};
-          gamedata.name = obj["name"];
-          gamedata.id = obj['id'];
+          gamedata.name = obj.name;
+          gamedata.id = obj.id;
           this.allgames.push(gamedata);
-        })
+        });
       }
       console.log('Success');
     }, () => {
@@ -38,14 +40,14 @@ export class RegistergamesPage implements OnInit {
     });
   }
 
-  getskilldata(){
+  getskilldata() {
     this.http.get(this.url2).subscribe((res1) => {
-      if(res1 instanceof Array){
+      if (res1 instanceof Array) {
         res1.forEach((obj) => {
           let skilldata = {level: ''};
-          skilldata.level = obj["level"];
+          skilldata.level = obj.level;
           this.allskills.push(skilldata);
-        })
+        });
       }
       console.log('Success');
     }, () => {
