@@ -10,6 +10,7 @@ const cors = require('cors');
 var login_register_handler = require('./login_register_handler');
 var home_handler = require('./home_handler');
 var create_game_handler = require('./create_game_handler');
+var class_handler = require('./class_handler');
 const app = express();
 const port = 3000;
 
