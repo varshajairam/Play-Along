@@ -11,6 +11,7 @@ var login_register_handler = require('./login_register_handler');
 var home_handler = require('./home_handler');
 var create_game_handler = require('./create_game_handler');
 var class_handler = require('./class_handler');
+var enroll_class_handler=require('./enroll_class_hadler');
 const app = express();
 const port = 3000;
 
@@ -50,5 +51,5 @@ app.post('/testlogin', (req, res) => {
 	res.json({status: "Success"});
 })
 app.get('/getClass',class_handler.getClassHandler);
-
+app.post('/enrollClass',enroll_class_handler.enrollClassHandler);
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

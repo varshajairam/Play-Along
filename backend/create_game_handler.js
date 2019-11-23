@@ -1,7 +1,10 @@
 function createGameHandler(req, res) {
     var mysql_helper = require('./mysql_helper.js');
     var dateFormat = require('dateformat');
-    var gameDate = req.body.date.split('T')[0];
+    var Gdate = req.body.date;
+    console.log(Gdate);
+    var gameDate = Gdate.split('T')[0];
+
     var currentDate=dateFormat(new Date(), "yyyy-mm-dd");
     var sql="call playalong.createGame ?;";
     const values = [[[req.body.game_type_id, req.body.name, gameDate, req.body.playerCount, req.body.cost * 100,
