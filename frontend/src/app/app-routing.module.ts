@@ -30,9 +30,11 @@ const routes: Routes = [
     loadChildren: () => import('./registergames/registergames.module').then(m => m.RegistergamesPageModule),
     canActivate: [AuthGuardService]
   },
-  { path: 'createclass',
+  { 
+    path: 'createclass',
     loadChildren: () => import('./createclass/createclass.module').then(m => m.CreateclassPageModule),
     canActivate: [AuthGuardService]
+
   },
   {
     path: 'game',
