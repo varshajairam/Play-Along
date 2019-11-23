@@ -23,7 +23,7 @@ function getWalletHandler(req, res) {
 }
 
 module.exports = {
-    getGamesHandler: getGamesHandler,
+    getWalletHandler: getWalletHandler,
 
 }
 
