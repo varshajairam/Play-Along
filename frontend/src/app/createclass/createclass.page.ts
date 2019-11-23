@@ -1,14 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { CommunicationService } from './../services/communication.service';
+import {CommunicationService} from "../services/communication.service";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: 'register.page.html',
-  styleUrls: ['register.page.scss'],
+  selector: 'app-createclass',
+  templateUrl: './createclass.page.html',
+  styleUrls: ['./createclass.page.scss'],
 })
-export class RegisterPage implements OnInit {
-  registerCredentials = {name: '', email: '', mobile: '', password: '', confirm_password: '', dob: '', country: '', zipcode: ''};
-  registerError = false;
+export class CreateclassPage implements OnInit {
+  classDetail = false;
+  registerskills = [{games: '', skills: ''}];
+  allgames = [
+    {game: 'Football', ID: '1'},
+    {game: 'Cricket', ID: '2'},
+    {game: 'Basketball', ID: '3'},
+    {game: 'Tennis', ID: '4'},
+    {game: 'Baseball', ID: '5'},
+  ];
+  classDetails = {
+    name: '',
+    date: '',
+    playerCount: '',
+    cost: '',
+    apt: '',
+    street: '',
+    city: '',
+    country: '',
+    zipcode: '',
+    created_by: 'User',
+    created_on: '11-24-2019',
+    owner_id: 'User'
+  };
   countries = [
     {name: 'Afghanistan', code: 'AF'},
     {name: 'Åland Islands', code: 'AX'},
@@ -254,20 +275,18 @@ export class RegisterPage implements OnInit {
     {name: 'Zambia', code: 'ZM'},
     {name: 'Zimbabwe', code: 'ZW'}
   ];
+  constructor(private comm: CommunicationService) { }
+  ngOnInit() {
+  }
 
-  constructor(private comm: CommunicationService) {}
-  ngOnInit() {}
+  createGame(form) {
+    console.log(this.classDetails);
+    this.comm.sendPost('register', this.classDetails).subscribe(() => {
+      console.log('Success');
+    }, () => {
+      this.classDetail = true;
+      console.log('Failed');
+    });
+  }
 
-  register(form) {
-    if (this.registerCredentials.password === this.registerCredentials.confirm_password) {
-      console.log(this.registerCredentials);
-      this.comm.sendPost('register', this.registerCredentials).subscribe(() => {
-        console.log('Success');
-      }, () => {
-        this.registerError = true;
-        console.log('Failed');
-      });
-    }
 }
-}
-

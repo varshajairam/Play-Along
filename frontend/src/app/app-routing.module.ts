@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuardService } from "./services/auth-guard.service";
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -26,6 +26,15 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
   },
   {
+    path: 'registergames',
+    loadChildren: () => import('./registergames/registergames.module').then(m => m.RegistergamesPageModule),
+    canActivate: [AuthGuardService]
+  },
+  { path: 'createclass',
+    loadChildren: () => import('./createclass/createclass.module').then(m => m.CreateclassPageModule),
+    canActivate: [AuthGuardService]
+  }
+    ];
     path: 'game',
     loadChildren: () => import('./game/game.module').then(m => m.GamePageModule),
     canActivate: [AuthGuardService]
