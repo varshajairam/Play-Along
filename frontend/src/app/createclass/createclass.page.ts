@@ -11,7 +11,7 @@ export class CreateclassPage implements OnInit {
   public date: string = new Date().toISOString();
   classDetail = false;
   allgames = [];
-  url1 = 'http://localhost:3000/registerclass';
+  url1 = 'http://localhost:3000/registergamecall';
   classDetails = {
     games: '',
     classname: '',
