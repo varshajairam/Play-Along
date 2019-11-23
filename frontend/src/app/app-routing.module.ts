@@ -31,8 +31,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   { path: 'createclass',
-    loadChildren: () => import('./createclass/createclass.module').then(m => m.CreateclassPageModule),
-    canActivate: [AuthGuardService]
+    loadChildren: () => import('./createclass/createclass.module').then(m => m.CreateclassPageModule)
   }
     ];
 

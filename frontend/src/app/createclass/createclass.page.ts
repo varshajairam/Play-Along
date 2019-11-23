@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CommunicationService} from "../services/communication.service";
+import {CommunicationService} from '../services/communication.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-createclass',
@@ -7,20 +8,20 @@ import {CommunicationService} from "../services/communication.service";
   styleUrls: ['./createclass.page.scss'],
 })
 export class CreateclassPage implements OnInit {
+  public date: string = new Date().toISOString();
   classDetail = false;
-  registerskills = [{games: '', skills: ''}];
-  allgames = [
-    {game: 'Football', ID: '1'},
-    {game: 'Cricket', ID: '2'},
-    {game: 'Basketball', ID: '3'},
-    {game: 'Tennis', ID: '4'},
-    {game: 'Baseball', ID: '5'},
-  ];
+  registerskills = [{games: ''}];
+  allgames = [];
+  url1 = 'http://localhost:3000/registergamecall';
+
+
   classDetails = {
     name: '',
-    date: '',
-    playerCount: '',
+    classname: '',
+    studentCount: '',
     cost: '',
+    startdate: '',
+    enddate: '',
     apt: '',
     street: '',
     city: '',
@@ -275,18 +276,36 @@ export class CreateclassPage implements OnInit {
     {name: 'Zambia', code: 'ZM'},
     {name: 'Zimbabwe', code: 'ZW'}
   ];
-  constructor(private comm: CommunicationService) { }
+  constructor(private comm: CommunicationService, private http: HttpClient) { }
   ngOnInit() {
+    this.getgamedata();
   }
 
-  createGame(form) {
-    console.log(this.classDetails);
-    this.comm.sendPost('register', this.classDetails).subscribe(() => {
+  getgamedata() {
+    this.http.get(this.url1).subscribe((res) => {
+      if (res instanceof Array) {
+        res.forEach((obj) => {
+          let gamedata = {name: '', id : 0};
+          gamedata.name = obj.name;
+          gamedata.id = obj.id;
+          this.allgames.push(gamedata);
+        });
+      }
       console.log('Success');
     }, () => {
-      this.classDetail = true;
       console.log('Failed');
     });
   }
 
+  createGame(form) {
+    if (this.classDetails.startdate <= this.classDetails.enddate) {
+      console.log(this.classDetails);
+      this.comm.sendPost('register', this.classDetails).subscribe(() => {
+        console.log('Success');
+      }, () => {
+        this.classDetail = true;
+        console.log('Failed');
+      });
+    }
+  }
 }
