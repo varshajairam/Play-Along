@@ -23,6 +23,11 @@ export class AppComponent {
       icon: 'list'
     },
     {
+      title: 'Create Game',
+      url: '/game',
+      icon: 'add-circle-outline'
+    },
+    {
       title: 'Logout',
       url: '/login',
       icon: 'log-out'

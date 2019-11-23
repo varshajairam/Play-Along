@@ -34,6 +34,11 @@ const routes: Routes = [
     loadChildren: () => import('./createclass/createclass.module').then(m => m.CreateclassPageModule)
   }
     ];
+    path: 'game',
+    loadChildren: () => import('./game/game.module').then(m => m.GamePageModule),
+    canActivate: [AuthGuardService]
+  }
+];
 
 @NgModule({
   imports: [
