@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommunicationService } from './../services/communication.service';
-import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import { all } from 'q';
 
 @Component({
   selector: 'app-registergames',
