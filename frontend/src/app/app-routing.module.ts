@@ -33,10 +33,15 @@ const routes: Routes = [
   { path: 'createclass',
     loadChildren: () => import('./createclass/createclass.module').then(m => m.CreateclassPageModule),
     canActivate: [AuthGuardService]
-  }
-    ];
+  },
+  {
     path: 'game',
     loadChildren: () => import('./game/game.module').then(m => m.GamePageModule),
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'class',
+    loadChildren: () => import('./class/class.module').then(m => m.ClassPageModule)
     canActivate: [AuthGuardService]
   }
 ];
