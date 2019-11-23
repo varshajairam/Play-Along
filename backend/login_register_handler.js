@@ -12,35 +12,56 @@ function registerUserHandler(req, res) {
 	});
 }
 
-async function registerGameHandler(req, res){
-	var x;
-	var game = (req.body.game).split(',');
-	var level = (req.body.level).split(',');
-	for (x=0 ; x<game.length; x++) {
-		const query2 = "select id from games_enum where name= '"+game[x]+"'";
-		const query3 = "select id from skill_level_enum where level= '"+level[x]+"'";
-		const query5 = "select id from user where email='"+req.body.email+"'";
-		let result_game = await mysql_helper.executeQuery(query2, null);
-		let result_skill = await mysql_helper.executeQuery(query3, null);
-		let result_user = await mysql_helper.executeQuery(query5, null);
-		const query4 = "INSERT INTO user_skills(user_id, game_id, skill_id) VALUES ("+result_user[0]['id']+", "+result_game[0]['id']+", "+result_skill[0]['id']+")";
-		await mysql_helper.executeQuer(query4, null);
+function registerGameCall(req, res){
+	const query = "SELECT * FROM games_enum";
+	mysql_helper.executeQuery(query, []).then((result) => {
+			res.send(result);
+		});
+}
+
+function registerSkillCall(req, res){
+	const query = "SELECT * FROM skill_level_enum";
+	mysql_helper.executeQuery(query, []).then((result) => {
+			res.send(result);
+		});
+}
+
+function registerGameHandler(req, res){
+	
+	size = game_id.length;
+	for (var i =0; i < size; i++){
+	const query = "INSERT INTO user_skills(user_id, game_id, skill_id) VALUES ?";
+	const values = [[[req.body.user_id, req.body.game_id, req.body.skill_id]]];
+	mysql_helper.executeQuery(query, values).then((result) => {
+			res.send("done");
+	});
 	}
-	res.send("done");
+	
 }
 
 function loginHandler(username, password, done) {
-	if(username == "test@test.com" && password == "test")
-		return done(null, {username: "test"})
-	return done(null, false, { message: 'Incorrect username or password.' });
+	const query = "select * from user where email = ?";
+	const args = [username];
+	mysql_helper.executeQuery(query, args).then((result) => {
+		if (!result.length) return done(null, false, { message: 'Incorrect username or password.' });
+		const hashed_pass = result[0].password;
+		bcrypt.compare(password, hashed_pass, function(err, res) {
+			if (err || !res) return done(null, false, { message: 'Incorrect username or password.' });
+			return done(null, result[0]);
+		});
+	});
 }
 
 function serializeUser(user, done) {
-	done(null, 1)
+	done(null, user.id);
 }
 
 function deserializeUser(id, done) {
-	done(null, {username: "test"})
+	const query = "select * from user where id = ?";
+	const args = [id];
+	mysql_helper.executeQuery(query, args).then((result) => {
+		done(null, result[0]);
+	});
 }
 
 function logoutHandler(req, res) {
@@ -52,6 +73,8 @@ module.exports = {
 	loginHandler: loginHandler,
 	registerUserHandler: registerUserHandler,
 	registerGameHandler: registerGameHandler,
+	registerGameCall: registerGameCall,
+	registerSkillCall: registerSkillCall,
 	logoutHandler: logoutHandler,
 	serializeUser: serializeUser,
 	deserializeUser: deserializeUser

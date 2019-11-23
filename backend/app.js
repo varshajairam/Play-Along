@@ -10,6 +10,7 @@ const cors = require('cors');
 var login_register_handler = require('./login_register_handler');
 var home_handler = require('./home_handler');
 var wallet_handler= require('./wallet_handler');
+var create_game_handler = require('./create_game_handler');
 const app = express();
 const port = 3000;
 
@@ -18,6 +19,7 @@ app.use(cors({
 	credentials: true
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
+var enroll_handler=require('./enroll_handler');
 app.use(session({
 	secret: 'keyboard cat',
   	resave: false,
@@ -37,9 +39,13 @@ app.post('/login', passport.authenticate('local'), function(req, res) {
 });
 app.get('/logout', login_register_handler.logoutHandler);
 app.get('/getGames',home_handler.getGamesHandler);
+app.post('/enrollGame',enroll_handler.enrollGamesHandler);
 app.post('/register', login_register_handler.registerUserHandler);
-app.post('/registergame', login_register_handler.registerGameHandler);
+app.get('/registergamecall', login_register_handler.registerGameCall);
 app.get('/getWallet',wallet_handler.getWalletHandler);
+app.get('/registerskillcall', login_register_handler.registerSkillCall);
+app.post('/registergamehandler', login_register_handler.registerGameHandler);
+app.post('/game', create_game_handler.createGameHandler);
 app.post('/testlogin', (req, res) => {
 	console.log(req.user);
 	res.json({status: "Success"});

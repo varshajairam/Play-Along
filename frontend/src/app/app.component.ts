@@ -23,10 +23,31 @@ export class AppComponent {
       icon: 'list'
     },
     {
+      title: 'Create Game',
+      url: '/game',
+      icon: 'add-circle-outline'
+    },
+    {
       title: 'Logout',
       url: '/login',
       icon: 'log-out'
+    },
+    {
+      title: 'Register',
+      url: '/register',
+      icon: 'add-circle'
+    },
+    {
+      title: 'Registergames',
+      url: '/registergames',
+      icon: 'add-circle'
+    },
+    {
+      title: 'Createclass',
+      url: '/createclass',
+      ion: 'add-circle'
     }
+
   ];
 
   constructor(

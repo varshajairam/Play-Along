@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { CommunicationService } from './../services/communication.service';
 
 @Component({
   selector: 'app-register',
@@ -7,10 +7,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
   styleUrls: ['register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  HttpUploadOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-  };
   registerCredentials = {name: '', email: '', mobile: '', password: '', confirm_password: '', dob: '', country: '', zipcode: ''};
+  registerError = false;
   countries = [
     {name: 'Afghanistan', code: 'AF'},
     {name: 'Åland Islands', code: 'AX'},
@@ -257,23 +255,16 @@ export class RegisterPage implements OnInit {
     {name: 'Zimbabwe', code: 'ZW'}
   ];
 
-  constructor(private http: HttpClient) {}
+  constructor(private comm: CommunicationService) {}
   ngOnInit() {}
+
   register(form) {
     if (this.registerCredentials.password === this.registerCredentials.confirm_password) {
-      let x = new URLSearchParams();
-      x.set('name', this.registerCredentials.name);
-      x.set('email', this.registerCredentials.email);
-      x.set('mobile', this.registerCredentials.mobile);
-      x.set('password', this.registerCredentials.password);
-      x.set('dob', this.registerCredentials.dob);
-      x.set('country', this.registerCredentials.country);
-      x.set('zipcode', this.registerCredentials.zipcode);
-      
       console.log(this.registerCredentials);
-      this.http.post('http://localhost:3000/register', x.toString(), this.HttpUploadOptions).subscribe(() => {
+      this.comm.sendPost('register', this.registerCredentials).subscribe(() => {
         console.log('Success');
       }, () => {
+        this.registerError = true;
         console.log('Failed');
       });
     }
