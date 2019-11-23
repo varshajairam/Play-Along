@@ -10,12 +10,10 @@ import {HttpClient} from '@angular/common/http';
 export class CreateclassPage implements OnInit {
   public date: string = new Date().toISOString();
   classDetail = false;
-  registerskills = [{games: ''}];
   allgames = [];
   url1 = 'http://localhost:3000/registergamecall';
-
-
   classDetails = {
+    games: '',
     classname: '',
     studentCount: '',
     cost: '',
