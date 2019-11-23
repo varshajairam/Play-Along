@@ -9,7 +9,7 @@ const cors = require('cors');
 
 var login_register_handler = require('./login_register_handler');
 var home_handler = require('./home_handler');
-
+var create_game_handler = require('./create_game_handler');
 const app = express();
 const port = 3000;
 
@@ -41,7 +41,7 @@ app.post('/register', login_register_handler.registerUserHandler);
 app.get('/registergamecall', login_register_handler.registerGameCall);
 app.get('/registerskillcall', login_register_handler.registerSkillCall);
 app.post('/registergamehandler', login_register_handler.registerGameHandler);
-
+app.post('/game', create_game_handler.createGameHandler);
 app.post('/testlogin', (req, res) => {
 	console.log(req.user);
 	res.json({status: "Success"});

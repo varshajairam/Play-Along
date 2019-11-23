@@ -35,6 +35,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   }
     ];
+    path: 'game',
+    loadChildren: () => import('./game/game.module').then(m => m.GamePageModule),
+    canActivate: [AuthGuardService]
+  }
+];
 
 @NgModule({
   imports: [
