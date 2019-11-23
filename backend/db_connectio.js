@@ -3,7 +3,8 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "Strikingviking"
+    password: "terry",
+    multipleStatements: true
 });
 
 
@@ -15,7 +16,7 @@ var functionSelect = (queryString) => { // console.log(queryString);
                 console.log(err);
             } else {
                 console.log(rows);
-                resolve(JSON.stringify(rows));
+                resolve(rows);
 
             }
         })
