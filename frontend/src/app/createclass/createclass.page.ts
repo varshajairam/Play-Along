@@ -294,10 +294,10 @@ export class CreateclassPage implements OnInit {
     });
   }
 
-  createGame(form) {
+  createclass(form) {
     if (Date.parse(this.classDetails.startdate) <= Date.parse(this.classDetails.enddate)) {
       console.log(this.classDetails);
-      this.comm.sendPost('register', this.classDetails).subscribe(() => {
+      this.comm.sendPost('registerclass', this.classDetails).subscribe(() => {
         console.log('Success');
       }, () => {
         this.classDetail = true;
