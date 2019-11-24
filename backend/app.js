@@ -11,7 +11,7 @@ var login_register_handler = require('./login_register_handler');
 var home_handler = require('./home_handler');
 var create_game_handler = require('./create_game_handler');
 var class_handler = require('./class_handler');
-var enroll_class_handler=require('./enroll_class_hadler');
+var enroll_class_handler=require('./enroll_class_handler.js');
 const app = express();
 const port = 3000;
 
