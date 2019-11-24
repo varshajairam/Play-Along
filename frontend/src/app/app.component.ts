@@ -28,16 +28,6 @@ export class AppComponent {
       icon: 'add-circle-outline'
     },
     {
-      title: 'Logout',
-      url: '/login',
-      icon: 'log-out'
-    },
-    {
-      title: 'Register',
-      url: '/register',
-      icon: 'add-circle'
-    },
-    {
       title: 'Registergames',
       url: '/registergames',
       icon: 'add-circle'
@@ -45,7 +35,12 @@ export class AppComponent {
     {
       title: 'Createclass',
       url: '/createclass',
-      ion: 'add-circle'
+      icon: 'add-circle'
+    },
+    {
+      title: 'Logout',
+      url: '/login',
+      icon: 'log-out'
     }
 
   ];
