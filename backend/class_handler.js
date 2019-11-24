@@ -1,9 +1,7 @@
 function getClassHandler(req, res) {
-    console.log("jkjkj");
     var mysql_helper = require('./mysql_helper.js');
-    var userId = 1 ;
+    var userId = reg.user.id ;
 
-    console.log("99");
     var sql="call playalong.getClass ?;";
     const values = [[[userId]]];
 
