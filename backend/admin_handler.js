@@ -12,7 +12,7 @@ function update_user_status(req, res) {
 	const query = "update user set is_blocked = ? where email = ?";
 	mysql_helper.executeQuery(query, [blocked, req.body.email]).then(() => {
 		res.send({status: "Success"});
-	})
+	});
 }
 
 module.exports = {
