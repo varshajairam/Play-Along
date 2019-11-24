@@ -1,8 +1,11 @@
 function walletLoadHandler(req, res) {
-
+    
+    console.log("walletLoadHandler");
     var mysql_helper = require('./mysql_helper');
-    var userID=1;
-
+    //var userID=1;
+    var userID=req.user.id;
+    
+    console.log("Amount:"+req.body.amount+" user_id:"+userID);
     var query="call playalong.loadWallet(?,?,@load);select @loadResponse as response;"
     
     mysql_helper.executeQuery(query,[req.body.amount,userID]).then((result) => {
