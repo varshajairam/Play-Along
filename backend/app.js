@@ -10,6 +10,7 @@ const cors = require('cors');
 var login_register_handler = require('./login_register_handler');
 var home_handler = require('./home_handler');
 var create_game_handler = require('./create_game_handler');
+var create_class_handler = require('./create_class_handler');
 const app = express();
 const port = 3000;
 
@@ -45,6 +46,6 @@ app.post('/game', create_game_handler.createGameHandler);
 app.post('/testlogin', (req, res) => {
 	console.log(req.user);
 	res.json({status: "Success"});
-})
-
+});
+app.post('/registerclass', create_class_handler.createClassHandler);
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
