@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot } from "@angular/router";
+import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 import { UserService } from './../services/user.service';
 import { NavController } from '@ionic/angular';
 

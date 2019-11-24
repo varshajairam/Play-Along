@@ -20,8 +20,7 @@ import { UserService } from './services/user.service';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),
-    AppRoutingModule,
-    HttpClientModule
+    AppRoutingModule
   ],
   providers: [
     StatusBar,

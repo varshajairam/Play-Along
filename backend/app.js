@@ -33,7 +33,7 @@ passport.serializeUser(login_register_handler.serializeUser);
 passport.deserializeUser(login_register_handler.deserializeUser);
 
 app.get('/user_logged_in', function(req, res) { res.send({logged_in: req.user ? true : false}) });
-app.post('/login', passport.authenticate('local'), function(req, res) {
+app.post('/logintemp', passport.authenticate('local'), function(req, res) {
 	res.send({status: "Success"});
 });
 app.get('/logout', login_register_handler.logoutHandler);

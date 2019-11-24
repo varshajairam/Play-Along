@@ -29,7 +29,7 @@ export class AppComponent {
     },
     {
       title: 'Logout',
-      url: '/login',
+      url: '/logintemp',
       icon: 'log-out'
     },
     {
