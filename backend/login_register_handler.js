@@ -3,10 +3,12 @@ const bcrypt = require('bcrypt');
 
 function registerUserHandler(req, res) {
 	var dob = req.body.dob.split('T')[0];
-	const query = "INSERT INTO user (name, email, password, is_admin, dob, mobile, country, zipcode) VALUES ?";
+	var sql="call PlayAlong.Register?;";
+	
 	bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
-		const values = [[[req.body.name, req.body.email, hashedPass, false, dob, req.body.mobile, req.body.country, req.body.zipcode]]];
-		mysql_helper.executeQuery(query, values).then((result) => {
+		const values = [[[req.body.name, req.body.email, hashedPass, dob, req.body.mobile, req.body.country, req.body.zipcode]]];
+		mysql_helper.executeQuery(sql, values).then((result) => {
+
 			res.send("Success");
 		});
 	});
