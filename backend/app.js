@@ -55,5 +55,6 @@ app.post('/testlogin', (req, res) => {
 });
 
 app.post('/getAllUsers', admin_handler.get_all_users);
+app.post('/updateUserStatus', admin_handler.update_user_status);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
