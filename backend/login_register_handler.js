@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 
 function registerUserHandler(req, res) {
 	var dob = req.body.dob.split('T')[0];
-	const query = "INSERT INTO user (name, email, password, is_admin, dob, mobile, country, zipcode) VALUES ?";
+	const query = "INSERT INTO user (name, email, password, is_admin, dob, mobile, country, zipcode, is_blocked) VALUES ?";
 	bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
-		const values = [[[req.body.name, req.body.email, hashedPass, false, dob, req.body.mobile, req.body.country, req.body.zipcode]]];
+		const values = [[[req.body.name, req.body.email, hashedPass, false, dob, req.body.mobile, req.body.country, req.body.zipcode, false]]];
 		mysql_helper.executeQuery(query, values).then((result) => {
 			res.send("Success");
 		});
@@ -41,7 +41,7 @@ function registerGameHandler(req, res){
 
 function loginHandler(req, username, password, done) {
 	const is_admin = (req.body.is_admin == 'true');
-	const query = "select * from user where email = ? and is_admin = ?";
+	const query = "select * from user where email = ? and is_admin = ? and is_blocked = false";
 	const args = [username, is_admin];
 	mysql_helper.executeQuery(query, args).then((result) => {
 		if (!result.length) return done(null, false, { message: 'Incorrect username or password.' });
