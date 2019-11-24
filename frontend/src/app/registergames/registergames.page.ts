@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommunicationService } from './../services/communication.service';
-import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-registergames',
@@ -10,20 +9,16 @@ import {HttpClient} from "@angular/common/http";
 export class RegistergamesPage implements OnInit {
   registerskills = [{games: '', skills: ''}];
   registerskill = false;
-  url1 = 'http://localhost:3000/registergamecall';
-  url2 = 'http://localhost:3000/registerskillcall';
-
   allgames = [];
   allskills = [];
-  constructor(private comm: CommunicationService, private http: HttpClient) { }
-
+  constructor(private comm: CommunicationService) { }
 
   ngOnInit() {
     this.getgamedata();
     this.getskilldata();
   }
   getgamedata() {
-    this.http.get(this.url1).subscribe((res) => {
+    this.comm.get('registergamecall').subscribe((res) => {
       if (res instanceof Array) {
         res.forEach((obj) => {
           let gamedata = {name: '', id : 0};
@@ -39,7 +34,7 @@ export class RegistergamesPage implements OnInit {
   }
 
   getskilldata() {
-    this.http.get(this.url2).subscribe((res1) => {
+    this.comm.get('registerskillcall').subscribe((res1) => {
       if (res1 instanceof Array) {
         res1.forEach((obj) => {
           let skilldata = {level: ''};

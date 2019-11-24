@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {CommunicationService} from '../services/communication.service';
-import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-createclass',
@@ -11,7 +10,6 @@ export class CreateclassPage implements OnInit {
   public date: string = new Date().toISOString();
   classDetail = false;
   allgames = [];
-  url1 = 'http://localhost:3000/registergamecall';
   classDetails = {
     games: '',
     classname: '',
@@ -273,13 +271,13 @@ export class CreateclassPage implements OnInit {
     {name: 'Zambia', code: 'ZM'},
     {name: 'Zimbabwe', code: 'ZW'}
   ];
-  constructor(private comm: CommunicationService, private http: HttpClient) { }
+  constructor(private comm: CommunicationService) { }
   ngOnInit() {
     this.getgamedata();
   }
 
   getgamedata() {
-    this.http.get(this.url1).subscribe((res) => {
+    this.comm.get('registergamecall').subscribe((res) => {
       if (res instanceof Array) {
         res.forEach((obj) => {
           let gamedata = {name: '', id : 0};
