@@ -19,6 +19,7 @@ app.use(cors({
 	credentials: true
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
+var enroll_handler=require('./enroll_handler');
 app.use(session({
 	secret: 'keyboard cat',
   	resave: false,
@@ -38,6 +39,7 @@ app.post('/login', passport.authenticate('local'), function(req, res) {
 });
 app.get('/logout', login_register_handler.logoutHandler);
 app.get('/getGames',home_handler.getGamesHandler);
+app.post('/enrollGame',enroll_handler.enrollGamesHandler);
 app.post('/register', login_register_handler.registerUserHandler);
 app.get('/registergamecall', login_register_handler.registerGameCall);
 app.get('/registerskillcall', login_register_handler.registerSkillCall);
