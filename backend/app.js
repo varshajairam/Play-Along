@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-const sql = require('mysql')
+const sql = require('mysql');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const cors = require('cors');
@@ -10,6 +10,7 @@ const cors = require('cors');
 var login_register_handler = require('./login_register_handler');
 var home_handler = require('./home_handler');
 var create_game_handler = require('./create_game_handler');
+var admin_handler = require('./admin_handler');
 const app = express();
 const port = 3000;
 
@@ -51,6 +52,8 @@ app.post('/game', create_game_handler.createGameHandler);
 app.post('/testlogin', (req, res) => {
 	console.log(req.user);
 	res.json({status: "Success"});
-})
+});
+
+app.post('/getAllUsers', admin_handler.get_all_users);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
