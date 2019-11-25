@@ -7,20 +7,16 @@ import {CommunicationService} from '../services/communication.service';
   styleUrls: ['./createclass.page.scss'],
 })
 export class CreateclassPage implements OnInit {
+  public date: string = new Date().toISOString();
   classDetail = false;
-  registerskills = [{games: '', skills: ''}];
-  allgames = [
-    {game: 'Football', ID: '1'},
-    {game: 'Cricket', ID: '2'},
-    {game: 'Basketball', ID: '3'},
-    {game: 'Tennis', ID: '4'},
-    {game: 'Baseball', ID: '5'},
-  ];
+  allgames = [];
   classDetails = {
-    name: '',
-    date: '',
-    playerCount: '',
+    games: '',
+    classname: '',
+    studentCount: '',
     cost: '',
+    startdate: '',
+    enddate: '',
     apt: '',
     street: '',
     city: '',
@@ -277,6 +273,7 @@ export class CreateclassPage implements OnInit {
   ];
   constructor(private comm: CommunicationService) { }
   ngOnInit() {
+    this.getgamedata();
   }
 
   createClass(form) {
@@ -284,9 +281,19 @@ export class CreateclassPage implements OnInit {
     this.comm.sendPost('register', this.classDetails).subscribe(() => {
       console.log('Success');
     }, () => {
-      this.classDetail = true;
       console.log('Failed');
     });
   }
 
+  createclass(form) {
+    if (Date.parse(this.classDetails.startdate) <= Date.parse(this.classDetails.enddate)) {
+      console.log(this.classDetails);
+      this.comm.sendPost('registerclass', this.classDetails).subscribe(() => {
+        console.log('Success');
+      }, () => {
+        this.classDetail = true;
+        console.log('Failed');
+      });
+    }
+  }
 }

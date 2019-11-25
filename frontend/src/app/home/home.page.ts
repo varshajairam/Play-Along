@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Game } from '../AppClass/game';
 import { OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { HomeService } from './home.service';
-import { Toast } from '../toast/toast';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-home',
@@ -10,28 +10,34 @@ import { Toast } from '../toast/toast';
   styleUrls: ['home.page.scss']
 })
 export class HomePage implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild(Toast, {static: true}) private toastComp: Toast; 
   private myGames: Array<Game>;
   private newGames: Array<Game>;
 
   private user: any;
   private segmentValue: any;
   private displayMsg: string;
+  private zipcode: number;
   private showSpinner: boolean;
   private zipcode: number;
   
-  constructor(private homeService: HomeService) {
-    this.user  = {name: "User", id: 1};
+  constructor(private homeService: HomeService, private toastService: ToastService) {    
     this.segmentValue = "myGames";
     this.showSpinner = false;
+    this.myGames = [];
+    this.newGames = [];
   }
 
   ngOnInit(){
-    this.showSpinner = true;
+    
   }
 
-  ngAfterViewInit(){
-    this.user = {zipcode: this.zipcode};
+  ngAfterViewInit(){ 
+    
+  }
+
+  getGames(){
+    this.showSpinner = true;
+    this.user  = {zipcode: this.zipcode};
     this.homeService.getGames(this.user).subscribe(data => {
       this.newGames = data.filter(game => {
         return game.hasJoined == false;
@@ -53,20 +59,19 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   joinGame(game){
     if(game.spots_taken == game.players_count){
       this.displayMsg = "This game is already full! Please join another one.";
-    }
-    //const values = [[[req.body.amount, req.body.id,req.body.owner_id, req.body.game_id]]];
+    } else if (game.cost == 0){
+      this.displayMsg = "You have successfully joined this game!";
+    } 
     let data = {owner_id: game.owner_id, game_id: game.id, amount: game.cost};
     this.homeService.enrollGame(data).subscribe((res) => {
       if(res[0].resultEnroll == "True" && res[0].enrollResponse == "Success"){
         this.displayMsg = "Your wallet has been debited with $" + game.cost + ". You have successfully joined this game!";
-      } else if (res[0].resultEnroll == "True" && res[0].enrollResponse == "Free game"){
-        this.displayMsg = "You have successfully joined this game!";
       } else if (res[0].resultEnroll == "False" && res[0].enrollResponse == "No funds"){
         this.displayMsg = "Insufficient balance. Please load your wallet.";
       } else {
         this.displayMsg = "Oops! There seems to be some problem at our end, please try again later.";        
       }
-      setTimeout(() => this.toastComp.presentToastWithOptions(), 0);
+      setTimeout(() => this.toastService.presentToastWithOptions(this.displayMsg), 0);
       console.log("Success");
     }, (err) => {
       console.log("Failed");

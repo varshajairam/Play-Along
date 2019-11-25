@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  serverRoot: "http://localhost:3000/"
+  serverRoot: "http://localhost:3000/",
+  stripePublishKey: 'pk_test_pIyIr91FGLJrCF19i5YTS0G200SH7hUusd'
 };
 
 /*

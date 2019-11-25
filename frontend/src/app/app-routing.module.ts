@@ -27,12 +27,11 @@ const routes: Routes = [
   },
   {
     path: 'registergames',
-    loadChildren: () => import('./registergames/registergames.module').then(m => m.RegistergamesPageModule),
     canActivate: [AuthGuardService]
+    loadChildren: () => import('./registergames/registergames.module').then(m => m.RegistergamesPageModule)
   },
-  { path: 'createclass',
-    loadChildren: () => import('./createclass/createclass.module').then(m => m.CreateclassPageModule),
-    canActivate: [AuthGuardService]
+  {path: 'createclass',
+    loadChildren: () => import('./createclass/createclass.module').then(m => m.CreateclassPageModule)
   },
   {
     path: 'game',
@@ -42,8 +41,11 @@ const routes: Routes = [
   {
     path: 'class',
     loadChildren: () => import('./class/class.module').then(m => m.ClassPageModule),
+    path: 'wallet',
+    loadChildren: () => import('./wallet/wallet.module').then(m => m.WalletModule),
     canActivate: [AuthGuardService]
   }
+
 ];
 
 @NgModule({
