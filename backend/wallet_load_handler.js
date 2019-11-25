@@ -5,10 +5,10 @@ function walletLoadHandler(req, res) {
     //var userID=1;
     var userID=req.user.id;
     
-    console.log("Amount:"+req.body.amount+" user_id:"+userID);
+    console.log("Amount:"+req.body.amount*100+" user_id:"+userID);
     var query="call playalong.loadWallet(?,?,@load);select @loadResponse as response;"
     
-    mysql_helper.executeQuery(query,[req.body.amount,userID]).then((result) => {
+    mysql_helper.executeQuery(query,[req.body.amount*100,userID]).then((result) => {
                 if(result[0].constructor.name=='OkPacket')
            		res.send(result[1]);
         	else
