@@ -20,6 +20,7 @@ export class LoginPage implements OnInit {
       this.checkIfUserLogged();
     }
   }
+  
   checkIfUserLogged() {
     this.comm.get('user_logged_in').subscribe((res) => {
       this.user.logged_in = res['logged_in'];

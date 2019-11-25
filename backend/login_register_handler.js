@@ -67,7 +67,7 @@ function deserializeUser(id, done) {
 
 function logoutHandler(req, res) {
 	req.logout();
-	res.send("Success");
+	res.send({res: "Success"});
 }
 
 module.exports = {
