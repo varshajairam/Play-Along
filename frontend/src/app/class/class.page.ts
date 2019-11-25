@@ -1,7 +1,7 @@
 import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import {GetClass} from '../AppClass/class';
 import {ClassService} from './class.service';
-import {Toast} from "../toast/toast";
+import { ToastService } from "../services/toast.service";
 
 @Component({
   selector: 'app-class',
@@ -9,7 +9,6 @@ import {Toast} from "../toast/toast";
   styleUrls: ['./class.page.scss'],
 })
 export class ClassPage implements OnInit, AfterViewInit {
-  @ViewChild(Toast, {static: true}) private toastComp: Toast;
   private myClasses: Array<GetClass>;
   private newClasses: Array<GetClass>;
 
@@ -19,7 +18,7 @@ export class ClassPage implements OnInit, AfterViewInit {
   private displayMsg: string;
   private showSpinner: boolean;
 
-  constructor(private classService: ClassService) {
+  constructor(private classService: ClassService, private toastService: ToastService) {
     this.segmentValue = 'myClasses';
     //this.myClasses = [];
     //this.newClasses = [];
@@ -78,7 +77,7 @@ export class ClassPage implements OnInit, AfterViewInit {
       } else {
         this.displayMsg = "Oops! There seems to be some problem at our end, please try again later.";
       }
-      setTimeout(() => this.toastComp.presentToastWithOptions(), 0);
+      setTimeout(() => this.toastService.presentToastWithOptions(this.displayMsg), 0);
       console.log("Success");
     }, (err) => {
       console.log("Failed");

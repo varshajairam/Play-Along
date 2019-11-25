@@ -27,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'registergames',
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService],
     loadChildren: () => import('./registergames/registergames.module').then(m => m.RegistergamesPageModule)
   },
   {path: 'createclass',
@@ -40,7 +40,9 @@ const routes: Routes = [
   },
   {
     path: 'class',
-    loadChildren: () => import('./class/class.module').then(m => m.ClassPageModule),
+    loadChildren: () => import('./class/class.module').then(m => m.ClassPageModule)
+  },
+  {
     path: 'wallet',
     loadChildren: () => import('./wallet/wallet.module').then(m => m.WalletModule),
     canActivate: [AuthGuardService]
