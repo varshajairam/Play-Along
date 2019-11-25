@@ -279,7 +279,7 @@ export class CreateclassPage implements OnInit {
   ngOnInit() {
   }
 
-  createGame(form) {
+  createClass(form) {
     console.log(this.classDetails);
     this.comm.sendPost('register', this.classDetails).subscribe(() => {
       console.log('Success');

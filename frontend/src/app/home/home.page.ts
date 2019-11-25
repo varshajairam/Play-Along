@@ -18,6 +18,7 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   private segmentValue: any;
   private displayMsg: string;
   private showSpinner: boolean;
+  private zipcode: number;
   
   constructor(private homeService: HomeService) {
     this.user  = {name: "User", id: 1};
@@ -29,7 +30,8 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     this.showSpinner = true;
   }
 
-  ngAfterViewInit(){ 
+  ngAfterViewInit(){
+    this.user = {zipcode: this.zipcode};
     this.homeService.getGames(this.user).subscribe(data => {
       this.newGames = data.filter(game => {
         return game.hasJoined == false;
@@ -52,6 +54,7 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     if(game.spots_taken == game.players_count){
       this.displayMsg = "This game is already full! Please join another one.";
     }
+    //const values = [[[req.body.amount, req.body.id,req.body.owner_id, req.body.game_id]]];
     let data = {owner_id: game.owner_id, game_id: game.id, amount: game.cost};
     this.homeService.enrollGame(data).subscribe((res) => {
       if(res[0].resultEnroll == "True" && res[0].enrollResponse == "Success"){

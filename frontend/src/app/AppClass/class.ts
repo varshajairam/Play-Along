@@ -10,6 +10,8 @@ export class GetClass {
     private _cost: number;
     private _address: Address;
     private _instructor_id: number;
+    private _hasJoined: boolean;
+    private _spots_taken: number;
 
     constructor(id: number = 0,
                 game_type_id: number = 0,
@@ -18,7 +20,8 @@ export class GetClass {
                 created_by: number = 0,
                 created_on: Date = new Date(),
                 cost: number = 0,
-                instructor_id: number = 0
+                instructor_id: number = 0,
+                hasJoined: boolean = false
     ) {
         this._id = id;
         this._game_type_id = game_type_id;
@@ -28,6 +31,7 @@ export class GetClass {
         this._created_on = created_on;
         this._cost = cost;
         this._instructor_id = instructor_id;
+        this._hasJoined = hasJoined;
     }
 
     get name(): string {
@@ -46,6 +50,10 @@ export class GetClass {
         return this._cost;
     }
 
+    get spots_taken(): number{
+        return this._spots_taken;
+    }
+
     get id(): number {
         return this._id;
     }
@@ -58,13 +66,18 @@ export class GetClass {
         return this._game_type_id;
     }
 
+    get hasJoined(): boolean{
+        return this._hasJoined;
+    }
+
     map(data) {
-        this._id = data.id;
+        this._id = data.class_id;
         this._game_type_id = data.game_type_id;
-        this._name = data.name.toUpperCase();
+        this._name = data.class_name.toUpperCase();
         this._student_count = data.student_count;
         this._cost = data.cost;
         this._instructor_id = data.instructor_id;
+        this._hasJoined = (data.hasJoined === 'True');
         this._address = new Address();
         data.address = JSON.parse(data.address);
         this._address.apt = data.address.apt;
@@ -72,6 +85,7 @@ export class GetClass {
         this._address.city = data.address.city;
         this._address.country = data.address.country;
         this._address.zipcode = data.address.zipcode;
+        this._spots_taken = data.spotsTaken;
     }
 }
 

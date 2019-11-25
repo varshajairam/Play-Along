@@ -29,9 +29,9 @@ export class ClassService {
             }))
     }
 
-    // enrollGame(gameDetail) {
-    //     this.url = "enrollGame";
-    //     return this.commService.sendPost(this.url, gameDetail);
-    // }
+    enrollClass(classDetail) {
+        this.url = "enrollClass";
+        return this.commService.sendPost(this.url, classDetail);
+    }
 }
 
