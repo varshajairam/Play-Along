@@ -42,6 +42,7 @@ export class AppComponent {
       url: '/wallet',
       icon: 'card'
     },
+    {
       title: 'Logout',
       url: '/login',
       icon: 'log-out'
