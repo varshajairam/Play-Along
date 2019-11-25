@@ -8,7 +8,7 @@ CREATE  PROCEDURE `enroll`(IN amount int(11),
  OUT enrollMessage varchar(255))
 BEGIN
 
-	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         ROLLBACK;
         SET @resultEnroll="False";-- rollback any error in the transaction
@@ -18,25 +18,25 @@ BEGIN
     select balance,id into @walletBalance,@userWalletId from wallet where user_id=userId;
     select id into @ownerWalletId from wallet where user_id=ownerId;
 
-	
-				
-		START TRANSACTION;
-            IF @walletBalance/100 >=amount 
-				THEN
-					update wallet set balance=balance-amount where user_id=UserId;
-					update wallet set balance=balance+amount where user_id=ownerId;
-					insert into game_enrollment (game_id,user_id) values (gameId,UserId);
-					insert into wallet_transactions(source_id,destination_id,amount,status) values (@userWalletId,@ownerWalletId,amount,1);
-					SET @resultEnroll="True";
-					SET @enrollMessage="Success";
-            
-					COMMIT;
 
-			ELSE 
-				SET @resultEnroll="False";
-				SET @enrollMessage="No funds";
-			END IF;
-	
+
+                START TRANSACTION;
+            IF @walletBalance >=amount
+                                THEN
+                                        update wallet set balance=balance-amount where user_id=UserId;
+                                        update wallet set balance=balance+amount where user_id=ownerId;
+                                        insert into game_enrollment (game_id,user_id) values (gameId,UserId);
+                                        insert into wallet_transactions(source_id,destination_id,amount,status) values (@userWalletId,@ownerWalletId,amount,1);
+                                        SET @resultEnroll="True";
+                                        SET @enrollMessage="Success";
+
+                                        COMMIT;
+
+                        ELSE
+                                SET @resultEnroll="False";
+                                SET @enrollMessage="No funds";
+                        END IF;
+
 END$$
 DELIMITER ;
 

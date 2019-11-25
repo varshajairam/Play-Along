@@ -11,7 +11,7 @@ SELECT A.*,count(GE.user_id) as spotsTaken from
      IF(EXISTS(SELECT * FROM playalong.game_enrollment WHERE game_id = G.id and user_id=userId)=1,'True','False') as hasJoined,S.level as skill
      FROM playalong.games G,playalong.skill_level_enum S
      where
-     G.zipcode=zipcode and 
+	 (zipcode IS NULL OR G.zipcode=zipcode) and 
      G.required_skill_level_id = S.id)A
      LEFT JOIN playalong.game_enrollment GE
      on A.id=GE.game_id
