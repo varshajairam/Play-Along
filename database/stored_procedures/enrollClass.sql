@@ -17,7 +17,7 @@ BEGIN
 	 select id into @instructorWalletId from wallet where user_id=InstructorId;
 	 
      START TRANSACTION;
-            IF @walletBalance/100 >=amount 
+            IF @walletBalance >=amount 
 				THEN
 					update wallet set balance=balance-amount where user_id=UserId;
 					update wallet set balance=balance+amount where user_id=InstructorId;
