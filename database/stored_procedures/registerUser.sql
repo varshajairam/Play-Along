@@ -8,13 +8,14 @@ CREATE PROCEDURE `registerUser`(
  IN dob datetime,
  IN mobile varchar(15),
  IN country varchar(32),
- IN zipcode varchar(12))
+ IN zipcode varchar(12),
+ IN is_blocked tinyint(4))
 BEGIN
 	DECLARE `_rollback` BOOL DEFAULT 0;
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = 1;
 	 
      START TRANSACTION;
-		INSERT INTO user (name, email, password, is_admin, dob, mobile, country, zipcode) values (name, email, password, is_admin, dob, mobile, country, zipcode);
+		INSERT INTO user (name, email, password, is_admin, dob, mobile, country, zipcode, is_blocked) values (name, email, password, is_admin, dob, mobile, country, zipcode, is_blocked);
         INSERT INTO wallet(user_id,balance ) values (LAST_INSERT_ID(),0);
        
          IF `_rollback` THEN

@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-const sql = require('mysql')
+const sql = require('mysql');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const cors = require('cors');
@@ -15,6 +15,7 @@ var create_game_handler = require('./create_game_handler');
 var create_class_handler = require('./create_class_handler');
 var class_handler = require('./class_handler');
 var enroll_class_handler=require('./enroll_class_handler.js');
+var admin_handler = require('./admin_handler');
 const app = express();
 const port = 3000;
 
@@ -33,7 +34,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy(login_register_handler.loginHandler));
+passport.use(new LocalStrategy({
+	usernameField: 'username', 
+	passwordField: 'password', 
+	passReqToCallback: true
+}, login_register_handler.loginHandler));
 passport.serializeUser(login_register_handler.serializeUser);
 passport.deserializeUser(login_register_handler.deserializeUser);
 
@@ -58,4 +63,12 @@ app.post('/testlogin', (req, res) => {
 app.post('/registerclass', create_class_handler.createClassHandler);
 app.get('/getClass',class_handler.getClassHandler);
 app.post('/enrollClass',enroll_class_handler.enrollClassHandler);
+
+app.post('/getAllUsers', admin_handler.get_all_users);
+app.post('/getAllGames', admin_handler.get_all_games);
+app.post('/getAllSkills', admin_handler.get_all_skills);
+app.post('/updateUserStatus', admin_handler.update_user_status);
+app.post('/insertGame', admin_handler.insert_game);
+app.post('/insertSkill', admin_handler.insert_skill);
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
