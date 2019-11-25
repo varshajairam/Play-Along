@@ -13,6 +13,8 @@ var wallet_handler= require('./wallet_handler');
 var wallet_load_handler= require('./wallet_load_handler');
 var create_game_handler = require('./create_game_handler');
 var create_class_handler = require('./create_class_handler');
+var class_handler = require('./class_handler');
+var enroll_class_handler=require('./enroll_class_handler.js');
 const app = express();
 const port = 3000;
 
@@ -54,4 +56,6 @@ app.post('/testlogin', (req, res) => {
 	res.json({status: "Success"});
 });
 app.post('/registerclass', create_class_handler.createClassHandler);
+app.get('/getClass',class_handler.getClassHandler);
+app.post('/enrollClass',enroll_class_handler.enrollClassHandler);
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
