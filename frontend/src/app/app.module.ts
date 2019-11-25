@@ -12,7 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { CommunicationService } from './services/communication.service';
 import { UserService } from './services/user.service';
-import { WalletModule } from './utilities/wallet/wallet.module';
+import { ToastService } from './services/toast.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,14 +22,14 @@ import { WalletModule } from './utilities/wallet/wallet.module';
     HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule,
-    WalletModule
+    HttpClientModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     CommunicationService,
     UserService,
+    ToastService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

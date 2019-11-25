@@ -46,6 +46,11 @@ export class AppComponent {
       title: 'Createclass',
       url: '/createclass',
       ion: 'add-circle'
+    },
+    {
+      title: 'Wallet',
+      url: '/wallet',
+      icon: 'card'
     }
 
   ];

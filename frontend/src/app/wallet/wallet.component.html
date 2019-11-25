@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+     Wallet
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class = "ion-padding">
+  <ion-card>
+      <ion-item>
+          <ion-label position="floating">Balance</ion-label>
+          <ion-input value="{{balance | async}}" readonly>$</ion-input>
+      </ion-item>
+  </ion-card>
+  <div class="ion-padding-top">
+      <ion-card>
+          <ion-item>      
+            <ion-label position="floating">Enter USD to be loaded:</ion-label>
+            <ion-input name="amount" [(ngModel)]="amount"></ion-input>
+          </ion-item>
+          <ion-button color="primary" (click)="openCheckout()">Load Wallet</ion-button>
+      </ion-card>
+  </div>  
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title size="small">&copy;&nbsp;Play Along</ion-title>
+    <ion-text color="secondary">
+        <ion-title size="small">Game. Match. Play.</ion-title>
+    </ion-text>
+  </ion-toolbar>
+</ion-footer>
