@@ -1,7 +1,7 @@
 function getGamesHandler(req, res) {
     var mysql_helper = require('./mysql_helper.js');
-    var userId = 1;
-    //var userId= req.user.id;
+    //var userId = 1;
+    var userId= req.user.id;
    
     
     console.log("UserID: " + userId+" zipcode:"+ req.body.zipcode) ;
