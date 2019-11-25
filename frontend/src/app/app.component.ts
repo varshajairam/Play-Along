@@ -38,6 +38,11 @@ export class AppComponent {
       icon: 'add-circle'
     },
     {
+      title: 'Class',
+      url: '/getClass',
+      icon: ''
+    },
+    {
       title: 'Wallet',
       url: '/wallet',
       icon: 'card'

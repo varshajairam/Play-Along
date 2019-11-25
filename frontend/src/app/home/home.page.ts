@@ -18,7 +18,6 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   private displayMsg: string;
   private zipcode: number;
   private showSpinner: boolean;
-  private zipcode: number;
   
   constructor(private homeService: HomeService, private toastService: ToastService) {    
     this.segmentValue = "myGames";
