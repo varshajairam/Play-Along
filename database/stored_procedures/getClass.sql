@@ -1,6 +1,6 @@
 DELIMITER $$
 DROP PROCEDURE if exists `getClass`;
-CREATE  PROCEDURE `getClass`(IN userID int(11),
+CREATE PROCEDURE `getClass`(IN userID int(11),
 IN zipcode varchar(12))
 BEGIN
 select A.class_id,A.class_name,A.game_type_id,A.student_count,count(CE.user_id) as spotsTaken,A.cost,A.address,A.start_time,A.end_time,A.hasJoined,A.created_by,A.instructor_name, A.instructor_id from 
@@ -9,7 +9,7 @@ select A.class_id,A.class_name,A.game_type_id,A.student_count,count(CE.user_id) 
     IF(EXISTS(SELECT * FROM playalong.class_enrollment WHERE class_id= C.id and user_id=userID )=1,'True','False') as hasJoined
      FROM class C,class_schedule CS,User I
      WHERE CS.class_id= C.id and
-	 C.zipcode=zipcode and
+	 (zipcode IS NULL OR C.zipcode=zipcode) and
 	 I.id=C.instructor_id)A 
 	LEFT JOIN playalong.class_enrollment CE
 	on A.class_id=CE.class_id
@@ -17,3 +17,4 @@ select A.class_id,A.class_name,A.game_type_id,A.student_count,count(CE.user_id) 
 
 END$$
 DELIMITER ;
+

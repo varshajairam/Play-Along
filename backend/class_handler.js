@@ -6,9 +6,9 @@ function getClassHandler(req, res) {
     var userID = req.user.id ;
 
 
-    console.log("user_id:"+userID,"zipcode: "+req.body.zipcode);
+    console.log("user_id:"+userID,"zipcode: "+req.query.zipcode);
     var sql="call playalong.getClass ?;";
-    const values = [[[userID,req.body.zipcode]]];
+    const values = [[[userID,req.query.zipcode]]];
 
     mysql_helper.executeQuery(sql, values).then((result) => {
                         res.send(result[0]);
