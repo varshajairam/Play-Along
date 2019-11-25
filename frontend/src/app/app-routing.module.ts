@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuardService } from "./services/auth-guard.service";
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -26,8 +26,20 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
   },
   {
+    path: 'registergames',
+    loadChildren: () => import('./registergames/registergames.module').then(m => m.RegistergamesPageModule)
+  },
+  {path: 'createclass',
+    loadChildren: () => import('./createclass/createclass.module').then(m => m.CreateclassPageModule)
+  },
+  {
     path: 'game',
     loadChildren: () => import('./game/game.module').then(m => m.GamePageModule),
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'wallet',
+    loadChildren: () => import('./wallet/wallet.module').then(m => m.WalletModule),
     canActivate: [AuthGuardService]
   }
 ];

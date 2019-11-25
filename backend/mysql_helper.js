@@ -13,6 +13,7 @@ function executeQuery(query, args) {
 		con.query(query, args, function(err, result) {
 			if (err) reject(err);
 			resolve(result);
+
 		});
 	});
 }

@@ -15,8 +15,10 @@ export class CommunicationService {
   	for (const key in data) {
   		getData.set(key, data[key]);
   	}
-
-  	return this.http.get(environment.serverRoot + route + "?" + getData.toString(), {withCredentials: true});
+	if (data)
+  		return this.http.get(environment.serverRoot + route + "?" + getData.toString(), {withCredentials: true});
+	else
+	  	return this.http.get(environment.serverRoot + route, {withCredentials: true});
   }
 
   sendPost(route, data=null) {

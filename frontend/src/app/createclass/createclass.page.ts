@@ -1,14 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { CommunicationService } from './../services/communication.service';
+import {CommunicationService} from '../services/communication.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: 'register.page.html',
-  styleUrls: ['register.page.scss'],
+  selector: 'app-createclass',
+  templateUrl: './createclass.page.html',
+  styleUrls: ['./createclass.page.scss'],
 })
-export class RegisterPage implements OnInit {
-  registerCredentials = {name: '', email: '', mobile: '', password: '', confirm_password: '', dob: '', country: '', zipcode: ''};
-  registerError = false;
+export class CreateclassPage implements OnInit {
+  public date: string = new Date().toISOString();
+  classDetail = false;
+  allgames = [];
+  classDetails = {
+    games: '',
+    classname: '',
+    studentCount: '',
+    cost: '',
+    startdate: '',
+    enddate: '',
+    apt: '',
+    street: '',
+    city: '',
+    country: '',
+    zipcode: '',
+    created_by: 'User',
+    created_on: '11-24-2019',
+    owner_id: 'User'
+  };
   countries = [
     {name: 'Afghanistan', code: 'AF'},
     {name: 'Åland Islands', code: 'AX'},
@@ -254,20 +271,36 @@ export class RegisterPage implements OnInit {
     {name: 'Zambia', code: 'ZM'},
     {name: 'Zimbabwe', code: 'ZW'}
   ];
+  constructor(private comm: CommunicationService) { }
+  ngOnInit() {
+    this.getgamedata();
+  }
 
-  constructor(private comm: CommunicationService) {}
-  ngOnInit() {}
+  getgamedata() {
+    this.comm.get('registergamecall').subscribe((res) => {
+      if (res instanceof Array) {
+        res.forEach((obj) => {
+          let gamedata = {name: '', id : 0};
+          gamedata.name = obj.name;
+          gamedata.id = obj.id;
+          this.allgames.push(gamedata);
+        });
+      }
+      console.log('Success');
+    }, () => {
+      console.log('Failed');
+    });
+  }
 
-  register(form) {
-    if (this.registerCredentials.password === this.registerCredentials.confirm_password) {
-      console.log(this.registerCredentials);
-      this.comm.sendPost('register', this.registerCredentials).subscribe(() => {
+  createclass(form) {
+    if (Date.parse(this.classDetails.startdate) <= Date.parse(this.classDetails.enddate)) {
+      console.log(this.classDetails);
+      this.comm.sendPost('registerclass', this.classDetails).subscribe(() => {
         console.log('Success');
       }, () => {
-        this.registerError = true;
+        this.classDetail = true;
         console.log('Failed');
       });
     }
+  }
 }
-}
-

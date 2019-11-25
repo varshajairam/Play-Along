@@ -23,9 +23,14 @@ export class AppComponent {
       icon: 'list'
     },
     {
-      title: 'Create Game',
-      url: '/game',
-      icon: 'add-circle-outline'
+      title: 'Logout',
+      url: '/login',
+      icon: 'log-out'
+    },
+    {
+      title: 'Register',
+      url: '/register',
+      icon: 'add-circle'
     },
     {
       title: 'Registergames',
@@ -35,17 +40,7 @@ export class AppComponent {
     {
       title: 'Createclass',
       url: '/createclass',
-      icon: 'add-circle'
-    },
-    {
-      title: 'Wallet',
-      url: '/wallet',
-      icon: 'card'
-    },
-    {
-      title: 'Logout',
-      url: '/login',
-      icon: 'log-out'
+      ion: 'add-circle'
     }
 
   ];
