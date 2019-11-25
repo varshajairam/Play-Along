@@ -1,6 +1,6 @@
 DELIMITER $$
 DROP PROCEDURE if exists `loadWallet`;
-CREATE PROCEDURE `loadWallet`(IN amount int(11),
+CREATE  PROCEDURE `loadWallet`(IN amount int(11),
  IN userId int(11),
  OUT response varchar(255))
 BEGIN
