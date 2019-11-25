@@ -3,7 +3,9 @@ const bcrypt = require('bcrypt');
 
 function registerUserHandler(req, res) {
 	var dob = req.body.dob.split('T')[0];
-	const query = "INSERT INTO user (name, email, password, is_admin, dob, mobile, country, zipcode, is_blocked) VALUES ?";
+	//const query = "INSERT INTO user (name, email, password, is_admin, dob, mobile, country, zipcode) VALUES ?";
+
+	var query="call registerUser ?;";
 	bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
 		const values = [[[req.body.name, req.body.email, hashedPass, false, dob, req.body.mobile, req.body.country, req.body.zipcode, false]]];
 		mysql_helper.executeQuery(query, values).then((result) => {

@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { HomePage } from './home.page';
-import { Toast } from '../toast/toast';
 
 @NgModule({
   imports: [
@@ -21,6 +20,6 @@ import { Toast } from '../toast/toast';
       }
     ])
   ],
-  declarations: [HomePage, Toast]
+  declarations: [HomePage]
 })
 export class HomePageModule {}

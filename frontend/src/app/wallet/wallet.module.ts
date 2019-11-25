@@ -1,24 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
-
-import { Header } from './header';
+import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
+import { WalletComponent } from "./wallet.component";
 
 @NgModule({
+  declarations: [WalletComponent],
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
+    FormsModule,
     RouterModule.forChild([
       {
         path: '',
-        component: Header
+        component: WalletComponent
       }
     ])
-  ],
-  declarations: [Header],
-  exports: [Header]
+  ]
 })
-export class HeaderModule {}
+export class WalletModule { }

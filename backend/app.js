@@ -9,7 +9,12 @@ const cors = require('cors');
 
 var login_register_handler = require('./login_register_handler');
 var home_handler = require('./home_handler');
+var wallet_handler= require('./wallet_handler');
+var wallet_load_handler= require('./wallet_load_handler');
 var create_game_handler = require('./create_game_handler');
+var create_class_handler = require('./create_class_handler');
+var class_handler = require('./class_handler');
+var enroll_class_handler=require('./enroll_class_handler.js');
 var admin_handler = require('./admin_handler');
 const app = express();
 const port = 3000;
@@ -46,6 +51,8 @@ app.get('/getGames',home_handler.getGamesHandler);
 app.post('/enrollGame',enroll_handler.enrollGamesHandler);
 app.post('/register', login_register_handler.registerUserHandler);
 app.get('/registergamecall', login_register_handler.registerGameCall);
+app.get('/getWallet',wallet_handler.getWalletHandler);
+app.post('/loadWallet',wallet_load_handler.walletLoadHandler);
 app.get('/registerskillcall', login_register_handler.registerSkillCall);
 app.post('/registergamehandler', login_register_handler.registerGameHandler);
 app.post('/game', create_game_handler.createGameHandler);
@@ -53,6 +60,9 @@ app.post('/testlogin', (req, res) => {
 	console.log(req.user);
 	res.json({status: "Success"});
 });
+app.post('/registerclass', create_class_handler.createClassHandler);
+app.get('/getClass',class_handler.getClassHandler);
+app.post('/enrollClass',enroll_class_handler.enrollClassHandler);
 
 app.post('/getAllUsers', admin_handler.get_all_users);
 app.post('/getAllGames', admin_handler.get_all_games);

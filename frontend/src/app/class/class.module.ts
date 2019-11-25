@@ -1,24 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
-import { Footer } from './footer';
+import { IonicModule } from '@ionic/angular';
+
+import { ClassPage } from './class.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: ClassPage
+  }
+];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: Footer
-      }
-    ])
+    RouterModule.forChild(routes)
   ],
-  declarations: [Footer],
-  exports: [Footer]
+  declarations: [ClassPage]
 })
-export class FooterModule {}
+export class ClassPageModule {}
