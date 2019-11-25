@@ -4,37 +4,37 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Home
+      User Management
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-segment [(ngModel)]="segmentValue" color="primary">
-      <ion-segment-button value="activeUsers">Active Users</ion-segment-button>
-      <ion-segment-button value="blockedUsers">Blocked Users</ion-segment-button>
-    </ion-segment>
+  <ion-segment [(ngModel)]="segmentValue" color="primary">
+    <ion-segment-button value="activeUsers">Active Users</ion-segment-button>
+    <ion-segment-button value="blockedUsers">Blocked Users</ion-segment-button>
+  </ion-segment>
 
-    <div [ngSwitch]="segmentValue">
-      <div *ngSwitchCase="'activeUsers'">
-        <ion-list>
-          <ng-container *ngFor="let user of users; let i = index">
-            <ion-item *ngIf="!user.is_blocked">
-              <ion-label>{{user.name}} ({{user.email}})</ion-label>
-              <ion-button size="default" (click)="update_user_status(i, user.email, true)">Block</ion-button>
-            </ion-item>
-          </ng-container>
-        </ion-list>
-      </div>
-      <div *ngSwitchCase="'blockedUsers'">
-        <ion-list>
-          <ng-container *ngFor="let user of users; let i = index;">
-            <ion-item *ngIf="user.is_blocked">
-              <ion-label>{{user.name}} ({{user.email}}</ion-label>
-              <ion-button size="default" (click)="update_user_status(i, user.email, false)">Unblock</ion-button>
-            </ion-item>
-          </ng-container>
-        </ion-list>
-      </div>
+  <div [ngSwitch]="segmentValue">
+    <div *ngSwitchCase="'activeUsers'">
+      <ion-list>
+        <ng-container *ngFor="let user of users; let i = index">
+          <ion-item *ngIf="!user.is_blocked">
+            <ion-label>{{user.name}} ({{user.email}})</ion-label>
+            <ion-button size="default" (click)="update_user_click_handler(i, user.email, true)">Block</ion-button>
+          </ion-item>
+        </ng-container>
+      </ion-list>
     </div>
+    <div *ngSwitchCase="'blockedUsers'">
+      <ion-list>
+        <ng-container *ngFor="let user of users; let i = index;">
+          <ion-item *ngIf="user.is_blocked">
+            <ion-label>{{user.name}} ({{user.email}}</ion-label>
+            <ion-button size="default" (click)="update_user_click_handler(i, user.email, false)">Unblock</ion-button>
+          </ion-item>
+        </ng-container>
+      </ion-list>
+    </div>
+  </div>
 </ion-content>

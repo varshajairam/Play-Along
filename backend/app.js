@@ -55,6 +55,10 @@ app.post('/testlogin', (req, res) => {
 });
 
 app.post('/getAllUsers', admin_handler.get_all_users);
+app.post('/getAllGames', admin_handler.get_all_games);
+app.post('/getAllSkills', admin_handler.get_all_skills);
 app.post('/updateUserStatus', admin_handler.update_user_status);
+app.post('/insertGame', admin_handler.insert_game);
+app.post('/insertSkill', admin_handler.insert_skill);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
