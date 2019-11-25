@@ -29,7 +29,7 @@ export class ClassPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.user = {zipcode: this.zipcode};
+
     this.classService.getClass(this.user).subscribe(data => {
       this.newClasses = data.filter(game => {
         return game.hasJoined == false;
