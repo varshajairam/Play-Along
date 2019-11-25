@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CommunicationService} from "../services/communication.service";
+import {CommunicationService} from '../services/communication.service';
 
 @Component({
   selector: 'app-createclass',
@@ -7,20 +7,16 @@ import {CommunicationService} from "../services/communication.service";
   styleUrls: ['./createclass.page.scss'],
 })
 export class CreateclassPage implements OnInit {
+  public date: string = new Date().toISOString();
   classDetail = false;
-  registerskills = [{games: '', skills: ''}];
-  allgames = [
-    {game: 'Football', ID: '1'},
-    {game: 'Cricket', ID: '2'},
-    {game: 'Basketball', ID: '3'},
-    {game: 'Tennis', ID: '4'},
-    {game: 'Baseball', ID: '5'},
-  ];
+  allgames = [];
   classDetails = {
-    name: '',
-    date: '',
-    playerCount: '',
+    games: '',
+    classname: '',
+    studentCount: '',
     cost: '',
+    startdate: '',
+    enddate: '',
     apt: '',
     street: '',
     city: '',
@@ -277,16 +273,34 @@ export class CreateclassPage implements OnInit {
   ];
   constructor(private comm: CommunicationService) { }
   ngOnInit() {
+    this.getgamedata();
   }
 
-  createGame(form) {
-    console.log(this.classDetails);
-    this.comm.sendPost('register', this.classDetails).subscribe(() => {
+  getgamedata() {
+    this.comm.get('registergamecall').subscribe((res) => {
+      if (res instanceof Array) {
+        res.forEach((obj) => {
+          let gamedata = {name: '', id : 0};
+          gamedata.name = obj.name;
+          gamedata.id = obj.id;
+          this.allgames.push(gamedata);
+        });
+      }
       console.log('Success');
     }, () => {
-      this.classDetail = true;
       console.log('Failed');
     });
   }
 
+  createclass(form) {
+    if (Date.parse(this.classDetails.startdate) <= Date.parse(this.classDetails.enddate)) {
+      console.log(this.classDetails);
+      this.comm.sendPost('registerclass', this.classDetails).subscribe(() => {
+        console.log('Success');
+      }, () => {
+        this.classDetail = true;
+        console.log('Failed');
+      });
+    }
+  }
 }
