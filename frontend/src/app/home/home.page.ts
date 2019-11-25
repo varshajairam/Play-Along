@@ -27,11 +27,19 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(){
-    
+
   }
 
-  ngAfterViewInit(){ 
-    
+  ngAfterViewInit(){
+    this.homeService.getGames(this.user).subscribe(data => {
+      this.newGames = data.filter(game => {
+        return game.hasJoined == false;
+      })
+      this.myGames = data.filter(game => {
+        return game.hasJoined == true;
+      })
+      this.showSpinner = false;
+    });
   }
 
   getGames(){
