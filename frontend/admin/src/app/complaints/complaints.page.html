@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Complaints</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-card *ngFor="let complaint of active_complaints">
+	  <ion-card-header>
+	    <ion-card-title>{{complaint.title}}</ion-card-title>
+	    <ion-card-subtitle>Made by: {{complaint.made_by}}</ion-card-subtitle>
+	  </ion-card-header>
+
+	  <ion-card-content>{{complaint.description}}</ion-card-content>
+      <ion-button size="default" (click)="resolve_click_handler(complaint.id)">Resolve</ion-button>
+	</ion-card>
+</ion-content>

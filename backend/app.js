@@ -73,5 +73,7 @@ app.post('/getAllSkills', admin_handler.get_all_skills);
 app.post('/updateUserStatus', admin_handler.update_user_status);
 app.post('/insertGame', admin_handler.insert_game);
 app.post('/insertSkill', admin_handler.insert_skill);
+app.post('/getActiveComplaints', admin_handler.get_active_complaints);
+app.post('/resolveComplaints', admin_handler.resolve_complaints);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
