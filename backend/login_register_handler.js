@@ -1,5 +1,6 @@
 var mysql_helper = require('./mysql_helper');
 const bcrypt = require('bcrypt');
+const logger = require('./logger');
 
 function registerUserHandler(req, res) {
 	var dob = req.body.dob.split('T')[0];
@@ -46,10 +47,17 @@ function loginHandler(req, username, password, done) {
 	const query = "select * from user where email = ? and is_admin = ? and is_blocked = false";
 	const args = [username, is_admin];
 	mysql_helper.executeQuery(query, args).then((result) => {
-		if (!result.length) return done(null, false, { message: 'Incorrect username or password.' });
+		if (!result.length) {
+			logger.log('error', "User with username " + username + " does not exist.");
+			return done(null, false, { message: 'Incorrect username or password.' });
+		}
 		const hashed_pass = result[0].password;
 		bcrypt.compare(password, hashed_pass, function(err, res) {
-			if (err || !res) return done(null, false, { message: 'Incorrect username or password.' });
+			if (err || !res) {
+				logger.log('error', "Incorrent password for user with username " + username);
+				return done(null, false, { message: 'Incorrect username or password.' });
+			}
+			logger.log('info', "User with username " + username + " successfully logged in.")
 			return done(null, result[0]);
 		});
 	});
