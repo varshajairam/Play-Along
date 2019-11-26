@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `PlayAlong`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` CHAR(60) NOT NULL,
   `is_admin` TINYINT NOT NULL,
   `dob` DATETIME NOT NULL,
   `mobile` VARCHAR(15) NOT NULL,
@@ -492,3 +492,86 @@ INSERT INTO `PlayAlong`.`day_enum` (`id`, `day`) VALUES (6, 'Saturday');
 INSERT INTO `PlayAlong`.`day_enum` (`id`, `day`) VALUES (7, 'Sunday');
 
 COMMIT;
+
+
+
+-- --------------------------------------------------------------------
+-- INSERTING THE SAMPLE DATA
+-- --------------------------------------------------------------------
+
+-- ---user----- 
+-- The password is hashed before storage
+INSERT INTO `playalong`.`user` (`id`, `name`, `email`, `password`, `is_admin`, `dob`, `mobile`, `apt`, `street`, `city`, `country`, `zipcode`, `is_blocked`) VALUES ('1', 'Karan', 'kup@gmail.com', '12', '1', '1996-10-31', '5096320147', '132', '1306', 'New York', 'US', '25962', '0');
+INSERT INTO `playalong`.`user` (`id`, `name`, `email`, `password`, `is_admin`, `dob`, `mobile`, `apt`, `street`, `city`, `country`, `zipcode`, `is_blocked`) VALUES ('2', 'Kedar', 'kdr@gmail.com', '12', '0', '1996-11-07', '4502369523', '325', '1632', 'San Jose', 'US', '95123', '1');
+INSERT INTO `playalong`.`user` (`id`, `name`, `email`, `password`, `is_admin`, `dob`, `mobile`, `apt`, `street`, `city`, `country`, `zipcode`, `is_blocked`) VALUES ('3', 'Ashwini', 'ash@gmail.com', '12', '0', '1993-08-23', '1236201596', '253', '1563', 'San Jose', 'US', '95126', '0');
+INSERT INTO `playalong`.`user` (`id`, `name`, `email`, `password`, `is_admin`, `dob`, `mobile`, `apt`, `street`, `city`, `country`, `zipcode`, `is_blocked`) VALUES ('4', 'Varsha', 'var@gamil.com', '12', '0', '1993-08-17', '8623015236', '246', '1425', 'San Diego', 'US', '62315', '0');
+INSERT INTO `playalong`.`user` (`id`, `name`, `email`, `password`, `is_admin`, `dob`, `mobile`, `apt`, `street`, `city`, `country`, `zipcode`, `is_blocked`) VALUES ('5', 'Belinda', 'bel@gmail.com', '12', '0', '1996-10-21', '1235602315', '365', '1236', 'New York', 'US', '25963', '0');
+
+-- --games----
+INSERT INTO `playalong`.`games` (`id`, `game_type_id`, `name`, `date`, `players_count`, `cost`, `apt`, `street`, `city`, `country`, `zipcode`, `created_by`, `created_on`, `owner_id`, `required_skill_level_id`) VALUES ('1', '1', 'Cricmeet', '2019-11-25', '22', '15', '156', '1963', 'San Jose', 'US', '95126', '2', '2019-11-21', '3', '1');
+INSERT INTO `playalong`.`games` (`id`, `game_type_id`, `name`, `date`, `players_count`, `cost`, `apt`, `street`, `city`, `country`, `zipcode`, `created_by`, `created_on`, `owner_id`, `required_skill_level_id`) VALUES ('2', '2', 'MegaBasket', '2019-11-20', '10', '25', '206', '1523', 'New York', 'US', '25963', '5', '2019-11-10', '5', '2');
+INSERT INTO `playalong`.`games` (`id`, `game_type_id`, `name`, `date`, `players_count`, `cost`, `apt`, `street`, `city`, `country`, `zipcode`, `created_by`, `created_on`, `owner_id`, `required_skill_level_id`) VALUES ('3', '1', 'CricPL', '2019-11-12', '22', '10', '355', '1263', 'San Jose', 'US', '62135', '4', '2019-11-08', '4', '1');
+
+-- --game_enrollment ----
+INSERT INTO `playalong`.`game_enrollment` (`id`, `game_id`, `user_id`) VALUES ('1', '1', '3');
+INSERT INTO `playalong`.`game_enrollment` (`id`, `game_id`, `user_id`) VALUES ('2', '2', '5');
+INSERT INTO `playalong`.`game_enrollment` (`id`, `game_id`, `user_id`) VALUES ('3', '3', '4');
+INSERT INTO `playalong`.`game_enrollment` (`id`, `game_id`, `user_id`) VALUES ('4', '1', '2');
+
+-- --class---
+INSERT INTO `playalong`.`class` (`id`, `game_type_id`, `name`, `student_count`, `cost`, `apt`, `street`, `city`, `country`, `zipcode`, `created_by`, `created_on`, `instructor_id`) VALUES ('1', '1', 'learncric', '10', '50', '162', '1306 ', 'San Jose', 'US', '95127', '3', '2019-11-25', '3');
+INSERT INTO `playalong`.`class` (`id`, `game_type_id`, `name`, `student_count`, `cost`, `apt`, `street`, `city`, `country`, `zipcode`, `created_by`, `created_on`, `instructor_id`) VALUES ('2', '2', 'knowto basket', '20', '15', '632', '5623', 'San Jose', 'US', '95362', '4', '2019-11-15', '4');
+INSERT INTO `playalong`.`class` (`id`, `game_type_id`, `name`, `student_count`, `cost`, `apt`, `street`, `city`, `country`, `zipcode`, `created_by`, `created_on`, `instructor_id`) VALUES ('3', '3', 'knowbaseball', '15', '25', '759', '1532', 'San Jose', 'US', '95123', '5', '2019-11-16', '5');
+
+-- --class_schedule --- 
+INSERT INTO `playalong`.`class_schedule` (`id`, `class_id`, `day`, `start_time`, `end_time`) VALUES ('1', '1', '2', '2019-11-25 16:30:00', '2019-11-25 17:30:00');
+INSERT INTO `playalong`.`class_schedule` (`id`, `class_id`, `day`, `start_time`, `end_time`) VALUES ('2', '2', '5', '2019-11-15 16:00:00', '2019-11-25 17:30:00');
+INSERT INTO `playalong`.`class_schedule` (`id`, `class_id`, `day`, `start_time`, `end_time`) VALUES ('3', '3', '3', '2019-11-16 14:30:00', '2019-11-26 16:30:00');
+
+-- --class_enrollment ----
+INSERT INTO `playalong`.`class_enrollment` (`id`, `class_id`, `user_id`) VALUES ('1', '1', '3');
+INSERT INTO `playalong`.`class_enrollment` (`id`, `class_id`, `user_id`) VALUES ('2', '2', '4');
+INSERT INTO `playalong`.`class_enrollment` (`id`, `class_id`, `user_id`) VALUES ('3', '3', '5');
+INSERT INTO `playalong`.`class_enrollment` (`id`, `class_id`, `user_id`) VALUES ('4', '1', '4');
+INSERT INTO `playalong`.`class_enrollment` (`id`, `class_id`, `user_id`) VALUES ('5', '2', '5');
+
+
+-- --wallet ----
+-- Amount is stored in cents
+INSERT INTO `playalong`.`wallet` (`id`, `user_id`, `balance`) VALUES ('1', '1', '20');
+INSERT INTO `playalong`.`wallet` (`id`, `user_id`, `balance`) VALUES ('2', '2', '196');
+INSERT INTO `playalong`.`wallet` (`id`, `user_id`, `balance`) VALUES ('3', '3', '362');
+INSERT INTO `playalong`.`wallet` (`id`, `user_id`, `balance`) VALUES ('4', '4', '86');
+INSERT INTO `playalong`.`wallet` (`id`, `user_id`, `balance`) VALUES ('5', '5', '235');
+
+
+-- ---wallet_payments ----
+INSERT INTO `playalong`.`wallet_payments` (`id`, `transactionId`, `amount`, `wallet_id`, `type`, `status`) VALUES ('1', '84220344368', '10', '4', '1', '1');
+INSERT INTO `playalong`.`wallet_payments` (`id`, `transactionId`, `amount`, `wallet_id`, `type`, `status`) VALUES ('2', '42280344368', '20', '5', '1', '1');
+INSERT INTO `playalong`.`wallet_payments` (`id`, `transactionId`, `amount`, `wallet_id`, `type`, `status`) VALUES ('3', '42244368856', '12', '5', '1', '2');
+INSERT INTO `playalong`.`wallet_payments` (`id`, `transactionId`, `amount`, `wallet_id`, `type`, `status`) VALUES ('4', '65451216821', '31', '4', '1', '1');
+INSERT INTO `playalong`.`wallet_payments` (`id`, `transactionId`, `amount`, `wallet_id`, `type`, `status`) VALUES ('5', '39898565161', '15', '3', '1', '1');
+
+-- ---wallet_transactions------
+INSERT INTO `playalong`.`wallet_transactions` (`id`, `source_id`, `destination_id`, `amount`, `status`) VALUES ('1', '4', '5', '10', '1');
+INSERT INTO `playalong`.`wallet_transactions` (`id`, `source_id`, `destination_id`, `amount`, `status`) VALUES ('2', '5', '3', '12', '1');
+INSERT INTO `playalong`.`wallet_transactions` (`id`, `source_id`, `destination_id`, `amount`, `status`) VALUES ('3', '3', '5', '3', '2');
+INSERT INTO `playalong`.`wallet_transactions` (`id`, `source_id`, `destination_id`, `amount`, `status`) VALUES ('4', '4', '3', '8', '1');
+INSERT INTO `playalong`.`wallet_transactions` (`id`, `source_id`, `destination_id`, `amount`, `status`) VALUES ('5', '3', '5', '3', '1');
+
+-- -complaints----
+INSERT INTO `playalong`.`complaints` (`id`, `title`, `description`, `status`, `made_by`, `made_on`, `reviewed_by`, `reviewed_on`, `review_message`) VALUES ('1', 'bad', 'He act very bad', '1', '4', '2019-11-15', '1', '2019-11-20', 'Block User');
+INSERT INTO `playalong`.`complaints` (`id`, `title`, `description`, `status`, `made_by`, `made_on`, `reviewed_by`, `reviewed_on`, `review_message`) VALUES ('2', 'abusive', 'He is abusive', '1', '5', '2019-11-19', '1', '2019-11-25', 'Block User');
+INSERT INTO `playalong`.`complaints` (`id`, `title`, `description`, `status`, `made_by`, `made_on`, `reviewed_by`, `reviewed_on`, `review_message`) VALUES ('3', 'not trustworthy', 'Didn\'t did his payment', '1', '3', '2019-11-08', '1', '2019-11-21', 'Block User');
+
+
+
+
+
+
+
+
+
+
+
+
