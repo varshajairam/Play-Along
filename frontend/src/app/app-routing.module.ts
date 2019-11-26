@@ -50,6 +50,11 @@ const routes: Routes = [
     path: 'wallet',
     loadChildren: () => import('./wallet/wallet.module').then(m => m.WalletModule),
     canActivate: [AuthGuardService]
+  },
+  { 
+    path: 'support', 
+    loadChildren: './support/support.module#SupportPageModule',
+    canActivate: [AuthGuardService]
   }
 
 ];

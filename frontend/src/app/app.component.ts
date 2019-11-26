@@ -43,6 +43,11 @@ export class AppComponent {
       icon: 'card'
     },
     {
+      title: 'Support',
+      url: '/support',
+      icon: 'card'
+    },
+    {
       title: 'Logout',
       url: '/login',
       icon: 'log-out'

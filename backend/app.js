@@ -14,7 +14,8 @@ var wallet_load_handler= require('./wallet_load_handler');
 var create_game_handler = require('./create_game_handler');
 var create_class_handler = require('./create_class_handler');
 var class_handler = require('./class_handler');
-var enroll_class_handler=require('./enroll_class_handler.js');
+var enroll_class_handler = require('./enroll_class_handler');
+var complaint_handler = require('./complaint_handler');
 var admin_handler = require('./admin_handler');
 const app = express();
 const port = 3000;
@@ -64,11 +65,15 @@ app.post('/registerclass', create_class_handler.createClassHandler);
 app.get('/getClass',class_handler.getClassHandler);
 app.post('/enrollClass',enroll_class_handler.enrollClassHandler);
 
+app.post('/makeComplaint', complaint_handler.make_complaint);
+
 app.post('/getAllUsers', admin_handler.get_all_users);
 app.post('/getAllGames', admin_handler.get_all_games);
 app.post('/getAllSkills', admin_handler.get_all_skills);
 app.post('/updateUserStatus', admin_handler.update_user_status);
 app.post('/insertGame', admin_handler.insert_game);
 app.post('/insertSkill', admin_handler.insert_skill);
+app.post('/getActiveComplaints', admin_handler.get_active_complaints);
+app.post('/resolveComplaints', admin_handler.resolve_complaints);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

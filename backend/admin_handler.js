@@ -45,11 +45,30 @@ function insert_skill(req, res) {
 	});
 }
 
+function get_active_complaints(req, res) {
+	const query = `select c.id, c.title, c.description, u.name as made_by from complaints c
+	inner join user u on u.id = c.made_by
+	where c.status != 3`;
+	mysql_helper.executeQuery(query, []).then((result) => {
+		res.send(result);
+	});
+}
+
+function resolve_complaints(req, res) {
+	const query = "update complaints set status = 3, reviewed_by = ?, reviewed_on = now(), review_message = ? where id = ?";
+	const args = [req.user.id, req.body.review_message, req.body.complaint_id];
+	mysql_helper.executeQuery(query, args).then((result) => {
+		res.send({status: "Success"});
+	});
+}
+
 module.exports = {
 	get_all_users: get_all_users,
 	update_user_status: update_user_status,
 	get_all_games: get_all_games,
 	get_all_skills: get_all_skills,
 	insert_game: insert_game,
-	insert_skill: insert_skill
+	insert_skill: insert_skill,
+	get_active_complaints: get_active_complaints,
+	resolve_complaints: resolve_complaints
 }

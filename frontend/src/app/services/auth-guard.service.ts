@@ -12,7 +12,7 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot) {
   	if (!this.user.logged_in) {
-  		this.navCtrl.navigateRoot('/logintemp');
+  		this.navCtrl.navigateRoot('/login');
   		return false;
   	}
   	return true;
