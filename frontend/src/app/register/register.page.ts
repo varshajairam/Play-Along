@@ -264,7 +264,7 @@ export class RegisterPage implements OnInit {
     if (this.registerCredentials.password === this.registerCredentials.confirm_password) {
       console.log(this.registerCredentials);
       this.comm.sendPost('register', this.registerCredentials).subscribe(() => {
-        this.navCtrl.navigateRoot('/login');
+        this.navCtrl.navigateRoot('/home');
         console.log('Success');
         this.registerError = false;
       },  (err) => {
