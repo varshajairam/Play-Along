@@ -28,14 +28,14 @@ export class AppComponent {
       icon: 'add-circle-outline'
     },
     {
-      title: 'Create Class',
-      url: '/createclass',
-      icon: 'add-circle-outline'
-    },
-    {
       title: 'Class',
       url: '/class',
       icon: 'logo-game-controller-a'
+    },
+    {
+      title: 'Create Class',
+      url: '/createclass',
+      icon: 'add-circle-outline'
     },
     {
       title: 'Wallet',
