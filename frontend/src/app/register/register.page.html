@@ -11,6 +11,9 @@
 
 <ion-content>
   <form #form="ngForm" (ngSubmit)="register(form)" method="post">
+    <ion-text color="danger" *ngIf="registerError">
+      <p>Error in registration, please try again.</p>
+    </ion-text>
     <ion-item>
       <ion-label position="floating">Name <ion-text color="danger">*</ion-text></ion-label>
       <ion-input name="name" [(ngModel)]="registerCredentials.name" ></ion-input>
@@ -53,6 +56,6 @@
       <ion-input required name = "zipcode" type="numeric" [(ngModel)]="registerCredentials.zipcode"></ion-input>
     </ion-item>
 
-    <ion-button type="submit" expand="full" color="danger" [disabled]="form.invalid" expand="block" routerLink="/login">Register</ion-button>
+    <ion-button type="submit" expand="full" color="danger" [disabled]="form.invalid" expand="block" >Register</ion-button>
   </form>
 </ion-content>
