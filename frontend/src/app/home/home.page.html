@@ -9,15 +9,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-card class="welcome-card">
-      <img src="/assets/kids.svg" alt="" />
-      <ion-card-header>
-        <ion-card-title>Welcome, {{user.name}}!</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Check out events near you. Happy gaming!</p>
-      </ion-card-content>
-    </ion-card>
+    <ion-searchbar placeholder="Enter zipcode" [(ngModel)] = "zipcode" (keyup.enter) = "getGames()"></ion-searchbar>
    
     <ion-segment [(ngModel)]="segmentValue" color="primary" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="myGames">
@@ -62,7 +54,7 @@
       </ion-card>
     </div>
       <div *ngSwitchCase="'newGames'">
-          <ion-card-subtitle *ngIf = "newGames && newGames.length == 0" color="medium" class="ion-padding-start ion-padding-top">Hmm ... looks like no games are created yet. Create one here.</ion-card-subtitle>
+          <ion-card-subtitle *ngIf = "newGames && newGames.length == 0" color="medium" class="ion-padding-start ion-padding-top">Hmm ... looks like no games are created yet. Please create one.</ion-card-subtitle>
           <ion-card *ngFor = "let game of newGames">
             <ion-item>
               <ion-text color="primary">
@@ -94,7 +86,6 @@
           </ion-card>
       </div>
   </div>
-  <toast [message] = displayMsg></toast>
 </ion-content>
 <ion-footer>
   <ion-toolbar>

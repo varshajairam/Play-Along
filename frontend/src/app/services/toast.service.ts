@@ -1,15 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
-@Component({
-  selector: 'toast',
-  templateUrl: 'toast.html',
-  styleUrls: ['./toast.scss'],
+@Injectable({
+  providedIn: 'root'
 })
-
-export class Toast {
-  @Input() message: string;
-
+export class ToastService {
   constructor(public toastController: ToastController) {}
 
   async presentToast() {
@@ -20,10 +15,10 @@ export class Toast {
     toast.present();
   }
 
-  async presentToastWithOptions() {
+  async presentToastWithOptions(message) {
     const toast = await this.toastController.create({
       header: '',
-      message: this.message,
+      message: message,
       position: 'bottom',
       buttons: [
         // {
@@ -45,5 +40,4 @@ export class Toast {
     });
     toast.present();
   }
-
 }

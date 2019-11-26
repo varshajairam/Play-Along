@@ -18,34 +18,34 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    },
-    {
       title: 'Create Game',
       url: '/game',
       icon: 'add-circle-outline'
     },
     {
-      title: 'Logout',
-      url: '/logintemp',
-      icon: 'log-out'
-    },
-    {
-      title: 'Register',
-      url: '/register',
-      icon: 'add-circle'
-    },
-    {
-      title: 'Registergames',
+      title: 'Register Games',
       url: '/registergames',
-      icon: 'add-circle'
+      icon: 'add-circle-outline'
     },
     {
-      title: 'Createclass',
+      title: 'Create Class',
       url: '/createclass',
-      ion: 'add-circle'
+      icon: 'add-circle-outline'
+    },
+    {
+      title: 'Class',
+      url: '/class',
+      icon: 'logo-game-controller-a'
+    },
+    {
+      title: 'Wallet',
+      url: '/wallet',
+      icon: 'card'
+    },
+    {
+      title: 'Logout',
+      url: '/login',
+      icon: 'log-out'
     }
 
   ];

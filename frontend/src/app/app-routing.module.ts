@@ -27,8 +27,8 @@ const routes: Routes = [
   },
   {
     path: 'registergames',
-    loadChildren: () => import('./registergames/registergames.module').then(m => m.RegistergamesPageModule),
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService],
+    loadChildren: () => import('./registergames/registergames.module').then(m => m.RegistergamesPageModule)
   },
   {
     path: 'createclass',
@@ -40,7 +40,18 @@ const routes: Routes = [
     path: 'game',
     loadChildren: () => import('./game/game.module').then(m => m.GamePageModule),
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'class',
+    loadChildren: () => import('./class/class.module').then(m => m.ClassPageModule),
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'wallet',
+    loadChildren: () => import('./wallet/wallet.module').then(m => m.WalletModule),
+    canActivate: [AuthGuardService]
   }
+
 ];
 
 @NgModule({
