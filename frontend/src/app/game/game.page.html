@@ -40,27 +40,27 @@
 
     <ion-item>
       <ion-label position="floating">Street<ion-text color="danger">*</ion-text></ion-label>
-      <ion-input name = "street" [(ngModel)]="eventDetails.street"></ion-input>
+      <ion-input required name = "street" [(ngModel)]="eventDetails.street"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">City<ion-text color="danger">*</ion-text></ion-label>
-      <ion-input name = "city" [(ngModel)]="eventDetails.city"></ion-input>
+      <ion-input required name = "city" [(ngModel)]="eventDetails.city"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Country <ion-text color="danger">*</ion-text></ion-label>
-      <ion-select name = "country" [(ngModel)]="eventDetails.country">
+      <ion-select required name = "country" [(ngModel)]="eventDetails.country">
         <ion-select-option *ngFor="let country of countries" [value] = "country.code" >{{country.name}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Zipcode <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input name = "zipcode" [(ngModel)]="eventDetails.zipcode"></ion-input>
+      <ion-input required name = "zipcode" [(ngModel)]="eventDetails.zipcode"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Preferred Game Skill Level <ion-text color="danger">*</ion-text></ion-label>
-      <ion-select name = "country" [(ngModel)]="eventDetails.required_skill_level_id">
+      <ion-select required name = "requiredSkillLevelId" [(ngModel)]="eventDetails.required_skill_level_id">
         <ion-select-option *ngFor="let skill of allskills" [value] = "skill.ID" >{{skill.skill}}</ion-select-option>
       </ion-select>
     </ion-item>

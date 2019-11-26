@@ -9,7 +9,7 @@ function registerUserHandler(req, res) {
 	bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
 		const values = [[[req.body.name, req.body.email, hashedPass, false, dob, req.body.mobile, req.body.country, req.body.zipcode]]];
 		mysql_helper.executeQuery(query, values).then((result) => {
-			res.send("Success");
+			res.send(JSON.stringify("Success"));
 		});
 	});
 }

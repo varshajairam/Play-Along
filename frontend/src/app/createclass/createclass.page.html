@@ -15,7 +15,7 @@
       <ion-col width-100>
         <ion-item>
           <ion-label position="floating">Games <ion-text color="danger">*</ion-text></ion-label>
-          <ion-select name = "country" [(ngModel)]="classDetails.games">
+          <ion-select required name = "games" [(ngModel)]="classDetails.games">
             <ion-select-option *ngFor="let game of allgames" [value] = "game.id" >{{game.name}}</ion-select-option>
           </ion-select>
         </ion-item>
@@ -23,11 +23,11 @@
     </ion-row>
     <ion-item>
       <ion-label position="floating">Class Name<ion-text color="danger">*</ion-text></ion-label>
-      <ion-input name="name" [(ngModel)]="classDetails.classname" ></ion-input>
+      <ion-input required name="name" [(ngModel)]="classDetails.classname" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Student Count<ion-text color="danger">*</ion-text></ion-label>
-      <ion-input required name = "playerCount" type="numeric" [(ngModel)]="classDetails.studentCount"></ion-input>
+      <ion-input required name = "studentCount" type="numeric" [(ngModel)]="classDetails.studentCount"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Class Cost<ion-text color="danger">*</ion-text></ion-label>
@@ -57,7 +57,7 @@
 
     <ion-item>
       <ion-label position="floating">Country <ion-text color="danger">*</ion-text></ion-label>
-      <ion-select name = "country" [(ngModel)]="classDetails.country">
+      <ion-select required name = "country" [(ngModel)]="classDetails.country">
         <ion-select-option *ngFor="let country of countries" [value] = "country.code" >{{country.name}}</ion-select-option>
       </ion-select>
     </ion-item>
