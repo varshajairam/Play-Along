@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-card class="welcome-card">
+    <img src="/assets/kids.svg" height="100px" width ="100px" alt="" />
+    <ion-card-header>
+      <ion-card-title>Play Along</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Login to start gaming. Have fun!</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+        <div padding>
+          <ion-text color="danger" *ngIf="loginError">
+              <p>Invalid Username/Password</p>
+          </ion-text>
+          <form #form="ngForm">
+            <ion-item>
+              <ion-input name="email" type="email" placeholder="your@email.com" [(ngModel)]="formData.username" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="password" type="password" placeholder="Password" [(ngModel)]="formData.password" required></ion-input>
+            </ion-item>
+          </form>
+        </div>
+        <div padding>
+          <ion-button size="large" (click)="login()" [disabled]="form.invalid" expand="block">Login</ion-button>
+          <p class="ion-text-right pointer" routerLink="/register">Create Account</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

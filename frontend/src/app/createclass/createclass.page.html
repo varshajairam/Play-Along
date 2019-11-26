@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Create Class
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="createclass(form)" method="post">
+    <ion-row>
+      <ion-col width-100>
+        <ion-item>
+          <ion-label position="floating">Games <ion-text color="danger">*</ion-text></ion-label>
+          <ion-select required name = "games" [(ngModel)]="classDetails.games">
+            <ion-select-option *ngFor="let game of allgames" [value] = "game.id" >{{game.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-item>
+      <ion-label position="floating">Class Name<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required name="name" [(ngModel)]="classDetails.classname" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Student Count<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required name = "studentCount" type="numeric" [(ngModel)]="classDetails.studentCount"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Class Cost<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required name="cost"  type="numeric" [(ngModel)]="classDetails.cost"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Start Date<ion-text color="danger">*</ion-text></ion-label>
+      <ion-datetime required name ="startdate" min= {{date}} max="2050-31-12" displayFormat="MMMM DD YYYY"  type="date" [(ngModel)]="classDetails.startdate" ></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">End Date<ion-text color="danger">*</ion-text></ion-label>
+      <ion-datetime required name ="enddate" min= {{date}} max="2050-31-12" displayFormat="MMMM DD YYYY"  type="date" [(ngModel)]="classDetails.enddate" ></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Apartment<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required name = "apt" [(ngModel)]="classDetails.apt"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Street<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required name = "street" [(ngModel)]="classDetails.street"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">City<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required name = "city" [(ngModel)]="classDetails.city"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Country <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select required name = "country" [(ngModel)]="classDetails.country">
+        <ion-select-option *ngFor="let country of countries" [value] = "country.code" >{{country.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Zipcode <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required name = "zipcode" [(ngModel)]="classDetails.zipcode"></ion-input>
+    </ion-item>
+    <ion-button type="submit" expand="full" color="primary" [disabled]="form.invalid" routerLink="/class" expand="block">Create Class</ion-button>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title size="small">&copy;&nbsp;Play Along</ion-title>
+    <ion-text color="secondary">
+        <ion-title size="small">Game. Match. Play.</ion-title>
+    </ion-text>
+  </ion-toolbar>
+</ion-footer>
