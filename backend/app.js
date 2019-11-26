@@ -21,7 +21,7 @@ const app = express();
 const port = 3000;
 
 app.use(cors({
-	origin: ["http://localhost:8100"],
+	origin: ["http://localhost:8100", "http://localhost:8101", "http://localhost:8102", "http://localhost:8103", "http://localhost:8104", "http://localhost:8105"],
 	credentials: true
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
