@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommunicationService } from './../services/communication.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -255,17 +256,22 @@ export class RegisterPage implements OnInit {
     {name: 'Zimbabwe', code: 'ZW'}
   ];
 
-  constructor(private comm: CommunicationService) {}
+
+  constructor(private comm: CommunicationService, private navCtrl: NavController) {}
   ngOnInit() {}
 
   register(form) {
     if (this.registerCredentials.password === this.registerCredentials.confirm_password) {
       console.log(this.registerCredentials);
       this.comm.sendPost('register', this.registerCredentials).subscribe(() => {
+        this.navCtrl.navigateRoot('/login');
         console.log('Success');
-      }, () => {
+        this.registerError = false;
+      },  (err) => {
         this.registerError = true;
         console.log('Failed');
+      }, () => {
+
       });
     }
 }
