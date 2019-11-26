@@ -7,7 +7,7 @@ function registerUserHandler(req, res) {
 
 	var query="call registerUser ?;";
 	bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
-		const values = [[[req.body.name, req.body.email, hashedPass, false, dob, req.body.mobile, req.body.country, req.body.zipcode]]];
+		const values = [[[req.body.name, req.body.email, hashedPass, false, dob, req.body.mobile, req.body.country, req.body.zipcode, false]]];
 		mysql_helper.executeQuery(query, values).then((result) => {
 			res.send(JSON.stringify("Success"));
 		});
@@ -41,9 +41,10 @@ function registerGameHandler(req, res){
 	
 }
 
-function loginHandler(username, password, done) {
-	const query = "select * from user where email = ?";
-	const args = [username];
+function loginHandler(req, username, password, done) {
+	const is_admin = (req.body.is_admin == 'true');
+	const query = "select * from user where email = ? and is_admin = ? and is_blocked = false";
+	const args = [username, is_admin];
 	mysql_helper.executeQuery(query, args).then((result) => {
 		if (!result.length) return done(null, false, { message: 'Incorrect username or password.' });
 		const hashed_pass = result[0].password;
@@ -68,7 +69,7 @@ function deserializeUser(id, done) {
 
 function logoutHandler(req, res) {
 	req.logout();
-	res.send("Success");
+	res.send({res: "Success"});
 }
 
 module.exports = {
